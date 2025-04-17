@@ -10,5 +10,5 @@ import {FooterComponent} from './core/components/footer/footer.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'client';
+
 }
