@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --brown-sugar: #B87B5C;
+  --wheat: #F4DDB8;
+  --moss-green: #91A756;
+  --chestnut: #90533B;
+  --gold: #DA983C;
+  --dark-fern: #495235;
+  --wheat-over: #F4DDB880;
+}
+
+p, span{
+  font-family: Verdana, serif;
+}
+.logo {
+  width: 80px;
+}
