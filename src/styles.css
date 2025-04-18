@@ -8,9 +8,15 @@
   --wheat-over: #F4DDB880;
 }
 
-p, span{
-  font-family: Verdana, serif;
-}
 .logo {
   width: 80px;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Verdana, serif;
 }
