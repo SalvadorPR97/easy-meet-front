@@ -33,4 +33,8 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
+
+  getUserInfo() {
+    return this.http.get('http://localhost:8000/api/user'); // protegido con Sanctum
+  }
 }

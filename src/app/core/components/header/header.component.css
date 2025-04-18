@@ -11,3 +11,7 @@
   background-color: var(--wheat);
 }
 
+li{
+  cursor: pointer;
+}
+
