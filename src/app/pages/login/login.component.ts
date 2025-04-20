@@ -24,12 +24,9 @@ export class LoginComponent {
 
   login (){
     this.sending = true;
-    console.log(this.loginForm.value);
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        console.log(response);
         const token = response.data.accessToken; // o donde Laravel te lo devuelva
-        console.log(token);
         this.authService.setToken(token);
         this.router.navigate(['']);
       },
