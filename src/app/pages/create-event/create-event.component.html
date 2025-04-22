@@ -1,0 +1,126 @@
+<main class="container-fluid d-flex justify-content-between align-items-center my-3 formBg">
+  <form class="col-6 m-2" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+    <h3 class="text-center">Nuevo Evento</h3>
+
+    <div class="mb-3">
+      <label class="form-label" for="category_id">Categoría Principal</label>
+      <select class="form-select" formControlName="category_id"
+              (change)="getSubcategories($event)">
+        <option value="" disabled selected>Seleccione Categoría…</option>
+        @for (category of categories; track category.id) {
+          <option [value]="category.id">{{ category.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="subcategory_id">Subcategoría</label>
+      <select class="form-select" formControlName="subcategory_id">
+        <option value="" disabled selected>Seleccione Subcategoría…</option>
+        @if (subcategories.length > 0) {
+          @for (subcategory of subcategories; track subcategory.id) {
+            <option [value]="subcategory.id">{{ subcategory.name }}</option>
+          }
+        }
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="title">Título</label>
+      <input type="text" class="form-control" formControlName="title">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="location">Dirección del Evento</label>
+      <input type="text" class="form-control" formControlName="location">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="event_image">Imagen</label>
+      <input type="file" class="form-control" accept="image/*" formControlName="event_image">
+    </div>
+
+    <div class="row d-flex align-items-center">
+      <div class="mb-3 col-7">
+        <label class="form-label" for="date">Fecha del Evento</label>
+        <input type="date" class="form-control" formControlName="date" [min]="minDate">
+      </div>
+      <div class="form-check col-2">
+        <input type="radio" class="form-check-input" id="onlyWomen" [checked]="eventForm.get('only_women')?.value"
+               (click)="toggleSelection('only_women')"/>
+        <label class="form-check-label" for="onlyWomen">Solo mujeres</label>
+      </div>
+
+      <div class="form-check col">
+        <input type="radio" class="form-check-input" id="onlyMen" [checked]="eventForm.get('only_men')?.value"
+               (click)="toggleSelection('only_men')"/>
+        <label class="form-check-label" for="onlyMen">Solo hombres</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mb-3 col">
+        <label class="form-label" for="start_time">Hora Inicio</label>
+        <input type="time" class="form-control" formControlName="start_time">
+      </div>
+      <div class="mb-3 col">
+        <label class="form-label" for="end_time">Hora Fin</label>
+        <input type="time" class="form-control" formControlName="end_time">
+      </div>
+      <div class="mb-3 col">
+        <label class="form-label" for="min_participant">Mín. Personas</label>
+        <input type="number" class="form-control" formControlName="min_participant" min="0" placeholder="0">
+      </div>
+      <div class="mb-3 col">
+        <label class="form-label" for="max_participant">Máx. Personas</label>
+        <input type="number" class="form-control" formControlName="max_participant" min="2" placeholder="2">
+      </div>
+      <div class="mb-3 col">
+        <label class="form-label" for="price">Precio (€)</label>
+        <input type="number" class="form-control" formControlName="price" min="0" placeholder="0">
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="description">Descripción</label>
+      <textarea class="form-control" formControlName="description" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="btn btnForm mb-3 mb-lg-0" [disabled]="eventForm.invalid" data-bs-toggle="modal"
+            data-bs-target="#createEventModal">
+      Crear Evento
+    </button>
+
+    @if (sending) {
+      <span class="d-inline-block mb-3 mb-lg-0" data-bs-toggle="tooltip"
+            title="Creando y publicando evento, por favor espere">
+        <button class="btn btnForm" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            Creando...
+        </button>
+      </span>
+    }
+
+    <div class="modal fade" id="createEventModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Evento creado</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Evento creado correctamente, espera a que se unan otros participantes.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="d-flex flex-column col-6 gap-2 py-2 pe-3">
+    <pages-events-location-map></pages-events-location-map>
+    <pages-events-event-img></pages-events-event-img>
+  </div>
+</main>
