@@ -1,4 +1,4 @@
-<main class="container-fluid d-flex justify-content-between align-items-center my-3 formBg">
+<main class="container-fluid d-flex justify-content-between align-items-center gap-5 my-3 formBg">
   <form class="col-6 m-2" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
     <h3 class="text-center">Nuevo Evento</h3>
 
@@ -119,7 +119,7 @@
     </div>
   </form>
 
-  <div class="d-flex flex-column col-6 gap-2 py-2 pe-3">
+  <div class="d-flex flex-column justify-content-center col-5 me-auto ms-5 gap-2 py-2">
     <pages-events-location-map></pages-events-location-map>
     <pages-events-event-img></pages-events-event-img>
   </div>
