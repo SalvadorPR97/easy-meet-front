@@ -5,6 +5,7 @@ import {EventFilterComponent} from './components/event-filter/event-filter.compo
 import {EventsListComponent} from './components/events-list/events-list.component';
 import {Category} from './interfaces/Category.interface';
 import {EventsService} from './services/events.service';
+import {Subcategory} from './interfaces/Subcategory.interface';
 
 @Component({
   selector: 'pages-events',
@@ -19,6 +20,7 @@ import {EventsService} from './services/events.service';
 })
 export class EventsComponent {
   public categories: Category[] = [];
+  public subcategories: Subcategory[] = [];
 
   constructor(public eventsService: EventsService) {
   }
@@ -27,6 +29,14 @@ export class EventsComponent {
     this.eventsService.getCategories().subscribe(
       (res) => {
         this.categories = res;
+      }
+    );
+  }
+
+  public getSubcategories(category_id: string) {
+    this.eventsService.getSubcategories(Number(category_id)).subscribe(
+      (res) => {
+        this.subcategories = res;
       }
     );
   }

@@ -1,1 +1,11 @@
-<p>subcategory-select works!</p>
+<div class="mb-3">
+  <label class="form-label" for="subcategory_id">Subcategoría</label>
+  <select class="form-select">
+    <option value="" disabled selected>Seleccione Subcategoría…</option>
+    @if (subcategories.length > 0) {
+      @for (subcategory of subcategories; track subcategory.id) {
+        <option [value]="subcategory.id">{{ subcategory.name }}</option>
+      }
+    }
+  </select>
+</div>

@@ -3,15 +3,6 @@
     <span><i class="bi bi-funnel-fill"></i> Filtros:</span>
     <span id="eventSearcherFilter"></span>
   </div>
-  <pages-events-category-select [categories]="this.categories"></pages-events-category-select>
-  <div class="mb-3 col-3">
-    <label class="form-label">Distancia Máxima</label>
-    <select class="form-select" id="subcategory" required>
-      <option value="0" selected>Sin límite</option>
-      <option value="1">1km</option>
-      <option value="5">5km</option>
-      <option value="10">10km</option>
-      <option value="100">100km</option>
-    </select>
-  </div>
+  <pages-events-category-select class="col-3" [categories]="this.categories" (categorySelectedEmitter)="emitCategoryId($event)"></pages-events-category-select>
+  <pages-events-subcategory-select class="col-3" [subcategories]="this.subcategories"></pages-events-subcategory-select>
 </div>
