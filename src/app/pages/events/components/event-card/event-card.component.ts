@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {MyEvent} from '../../interfaces/MyEvent.interface';
 
 @Component({
   selector: 'pages-events-event-card',
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './event-card.component.css'
 })
 export class EventCardComponent {
-
+  @Input()
+  public event!: MyEvent;
 }

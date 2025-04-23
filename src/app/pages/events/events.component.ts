@@ -6,6 +6,7 @@ import {EventsListComponent} from './components/events-list/events-list.componen
 import {Category} from './interfaces/Category.interface';
 import {EventsService} from './services/events.service';
 import {Subcategory} from './interfaces/Subcategory.interface';
+import {MyEvent} from './interfaces/MyEvent.interface';
 
 @Component({
   selector: 'pages-events',
@@ -21,6 +22,8 @@ import {Subcategory} from './interfaces/Subcategory.interface';
 export class EventsComponent {
   public categories: Category[] = [];
   public subcategories: Subcategory[] = [];
+  public events: MyEvent[] = [];
+  public loading = true;
 
   constructor(public eventsService: EventsService) {
   }
@@ -31,6 +34,12 @@ export class EventsComponent {
         this.categories = res;
       }
     );
+    this.eventsService.getEventsByCity("Málaga").subscribe(
+      (res) => {
+        this.events = res.events;
+        this.loading = false;
+      }
+    )
   }
 
   public getSubcategories(category_id: string) {
