@@ -15,7 +15,7 @@ export class LoginComponent {
   public loginForm: FormGroup;
   public sending: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private readonly authService: AuthService, private readonly router: Router) {
     this.loginForm = new FormGroup({
       email: new FormControl("", [Validators.required, Validators.email]),
       password: new FormControl("", [Validators.required])

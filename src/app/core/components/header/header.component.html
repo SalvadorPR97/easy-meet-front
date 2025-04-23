@@ -19,10 +19,10 @@
       <a href="#" class="btn btnNav rounded-start-0 d-flex align-items-center">Colabora</a>
       @if (authService.isAuthenticated()) {
         <li class="nav-item dropdown ms-2 px-1 d-flex align-items-center btnNav rounded-1">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">
+          <button class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                  data-bs-toggle="dropdown" aria-expanded="false">
             <img ngSrc="assets/css/usuario.png" alt="foto de usuario" height="50" width="50">
-          </a>
+          </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="#">Mi perfil</a></li>
             <li><a class="dropdown-item" href="#">Mis eventos</a></li>

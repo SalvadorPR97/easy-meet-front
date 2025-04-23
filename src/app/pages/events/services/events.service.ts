@@ -9,8 +9,8 @@ import {Subcategory} from '../interfaces/Subcategory.interface';
 })
 export class EventsService {
 
-  constructor(private http: HttpClient) { }
-  private apiUrl = 'http://localhost:8000/api/';
+  constructor(private readonly http: HttpClient) { }
+  private readonly apiUrl = 'http://localhost:8000/api/';
 
   public getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.apiUrl}categories`);
