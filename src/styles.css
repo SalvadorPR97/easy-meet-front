@@ -8,10 +8,6 @@
   --wheat-over: #F4DDB880;
 }
 
-.logo {
-  width: 80px;
-}
-
 html, body {
   height: 100%;
   margin: 0;
@@ -29,4 +25,17 @@ app-root {
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+.logo {
+  width: 80px;
+}
+
+.wheatBg{
+  background-color: var(--wheat);
+}
+
+.btnForm{
+  background-color: var(--moss-green) !important;
+  color: white !important;
 }

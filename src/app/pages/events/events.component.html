@@ -1,6 +1,7 @@
 <main class="container-fluid d-flex justify-content-between align-items-center gap-5 my-3 wheatBg">
   <div class="d-flex flex-column col-6 align-self-start">
     <h3>Eventos</h3>
+    <!--TODO boton para crear evento-->
     <pages-events-event-filter [categories]="this.categories" [subcategories]="this.subcategories" (categoryIdEmitter)="getSubcategories($event)"></pages-events-event-filter>
     <pages-events-events-list [events]="this.events" [loading]="this.loading"></pages-events-events-list>
   </div>
