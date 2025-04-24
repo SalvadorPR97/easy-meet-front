@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {RegisterService} from './services/register.service';
 
 @Component({
   selector: 'pages-register',
@@ -15,7 +16,7 @@ export class RegisterComponent {
   public sending: boolean = false;
   public registerForm: FormGroup;
 
-  constructor(private readonly fb: FormBuilder, public router: Router) {
+  constructor(private readonly fb: FormBuilder, public router: Router, private readonly registerService: RegisterService) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
@@ -36,7 +37,6 @@ export class RegisterComponent {
     const modal = document.getElementById('createUserModal');
     if (modal) {
       modal.addEventListener('hidden.bs.modal', () => {
-        // Redirigir a /eventos cuando el modal se cierre
         this.router.navigate(['']);
       });
     }
@@ -45,8 +45,7 @@ export class RegisterComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       this.sending = true;
-      console.log(this.registerForm.value);
-      //TODO logica para enviar al backend
+      this.registerService.registerUser(this.registerForm.value).subscribe();
     } else {
       this.registerForm.markAllAsTouched();
     }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Category} from '../interfaces/Category.interface';
@@ -10,7 +10,9 @@ import {MyEvent} from '../interfaces/MyEvent.interface';
 })
 export class EventsService {
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {
+  }
+
   private readonly apiUrl = 'http://localhost:8000/api/';
 
   public getCategories(): Observable<Category[]> {
@@ -21,7 +23,7 @@ export class EventsService {
     return this.http.get<Subcategory[]>(`${this.apiUrl}subcategories/${id}`);
   }
 
-  public getEventsByCity(city: string): Observable<{events: MyEvent[]}>{
-    return this.http.get<{events: MyEvent[]}>(`${this.apiUrl}events/${city}`);
+  public getEventsByCity(city: string): Observable<{ events: MyEvent[] }> {
+    return this.http.get<{ events: MyEvent[] }>(`${this.apiUrl}events/${city}`);
   }
 }
