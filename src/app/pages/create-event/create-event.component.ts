@@ -7,6 +7,7 @@ import {dateNotInThePastValidator} from '../../core/validators/date.validator';
 import {Router} from '@angular/router';
 import {LocationMapComponent} from '../events/components/location-map/location-map.component';
 import {EventImgComponent} from '../events/components/event-img/event-img.component';
+import {CreateEventService} from './services/create-event.service';
 
 @Component({
   selector: 'pages-events-create-event',
@@ -27,7 +28,7 @@ export class CreateEventComponent {
   public sending: boolean = false;
   public eventForm: FormGroup;
 
-  constructor(public eventsService: EventsService, private readonly fb: FormBuilder, public router: Router) {
+  constructor(public eventsService: EventsService,public createEventService: CreateEventService, private readonly fb: FormBuilder, public router: Router) {
     this.eventForm = this.fb.group({
       category_id: ['', Validators.required],
       subcategory_id: ['', Validators.required],
@@ -37,12 +38,12 @@ export class CreateEventComponent {
       date: ['', [Validators.required, dateNotInThePastValidator()]],
       start_time: ['', Validators.required],
       end_time: [''],
-      min_participant: [2, [Validators.required, Validators.min(2)]],
-      max_participant: [2, Validators.min(2)],
+      min_participants: [2, [Validators.required, Validators.min(2)]],
+      max_participants: [2, Validators.min(2)],
       price: [0, [Validators.required, Validators.min(0)]],
       only_women: [false],
       only_men: [false],
-      description: [''],
+      description: ['', Validators.required],
     });
   }
 
@@ -57,7 +58,6 @@ export class CreateEventComponent {
     const modal = document.getElementById('createEventModal');
     if (modal) {
       modal.addEventListener('hidden.bs.modal', () => {
-        // Redirigir a /eventos cuando el modal se cierre
         this.router.navigate(['/eventos']);
       });
     }
@@ -76,8 +76,8 @@ export class CreateEventComponent {
   onSubmit() {
     if (this.eventForm.valid) {
       this.sending = true;
-      console.log(this.eventForm.value);
-      //TODO logica para enviar al backend
+      this.eventForm.addControl('city', this.fb.control('Málaga'));
+      this.createEventService.postEvent(this.eventForm.value).subscribe();
     } else {
       this.eventForm.markAllAsTouched();
     }

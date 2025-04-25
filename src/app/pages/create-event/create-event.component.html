@@ -3,7 +3,7 @@
     <h3 class="text-center">Nuevo Evento</h3>
 
     <div class="mb-3">
-      <label class="form-label" for="category_id">Categoría Principal</label>
+      <label class="form-label" for="category_id">Categoría Principal*</label>
       <select class="form-select" formControlName="category_id"
               (change)="getSubcategories($event)">
         <option value="" disabled selected>Seleccione Categoría…</option>
@@ -14,7 +14,7 @@
     </div>
 
     <div class="mb-3">
-      <label class="form-label" for="subcategory_id">Subcategoría</label>
+      <label class="form-label" for="subcategory_id">Subcategoría*</label>
       <select class="form-select" formControlName="subcategory_id">
         <option value="" disabled selected>Seleccione Subcategoría…</option>
         @if (subcategories.length > 0) {
@@ -26,12 +26,12 @@
     </div>
 
     <div class="mb-3">
-      <label class="form-label" for="title">Título</label>
+      <label class="form-label" for="title">Título*</label>
       <input type="text" class="form-control" formControlName="title">
     </div>
 
     <div class="mb-3">
-      <label class="form-label" for="location">Dirección del Evento</label>
+      <label class="form-label" for="location">Dirección del Evento*</label>
       <input type="text" class="form-control" formControlName="location">
     </div>
 
@@ -42,7 +42,7 @@
 
     <div class="row d-flex align-items-center">
       <div class="mb-3 col-7">
-        <label class="form-label" for="date">Fecha del Evento</label>
+        <label class="form-label" for="date">Fecha del Evento*</label>
         <input type="date" class="form-control" formControlName="date" [min]="minDate">
       </div>
       <div class="form-check col-2">
@@ -60,7 +60,7 @@
 
     <div class="row">
       <div class="mb-3 col">
-        <label class="form-label" for="start_time">Hora Inicio</label>
+        <label class="form-label" for="start_time">Hora Inicio*</label>
         <input type="time" class="form-control" formControlName="start_time">
       </div>
       <div class="mb-3 col">
@@ -68,12 +68,12 @@
         <input type="time" class="form-control" formControlName="end_time">
       </div>
       <div class="mb-3 col">
-        <label class="form-label" for="min_participant">Mín. Personas</label>
-        <input type="number" class="form-control" formControlName="min_participant" min="0" placeholder="0">
+        <label class="form-label" for="min_participant">Mín. Personas*</label>
+        <input type="number" class="form-control" formControlName="min_participants" min="0" placeholder="0">
       </div>
       <div class="mb-3 col">
-        <label class="form-label" for="max_participant">Máx. Personas</label>
-        <input type="number" class="form-control" formControlName="max_participant" min="2" placeholder="2">
+        <label class="form-label" for="max_participant">Máx. Personas*</label>
+        <input type="number" class="form-control" formControlName="max_participants" min="2" placeholder="2">
       </div>
       <div class="mb-3 col">
         <label class="form-label" for="price">Precio (€)</label>
@@ -82,7 +82,7 @@
     </div>
 
     <div class="mb-3">
-      <label class="form-label" for="description">Descripción</label>
+      <label class="form-label" for="description">Descripción*</label>
       <textarea class="form-control" formControlName="description" rows="3"></textarea>
     </div>
 
