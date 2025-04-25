@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.mainLogin{
+  background-color: var(--wheat);
+}
+
+.btnLogin{
+  background-color: var(--moss-green);
+  color: white;
+}

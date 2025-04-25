@@ -1,0 +1,17 @@
+.navbar {
+  height: 5rem;
+  background-color: var(--gold);
+}
+
+.btnNav {
+  background-color: var(--wheat-over);
+}
+
+.btnNav:hover {
+  background-color: var(--wheat);
+}
+
+li{
+  cursor: pointer;
+}
+

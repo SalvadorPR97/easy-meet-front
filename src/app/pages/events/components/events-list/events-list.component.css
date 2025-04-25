@@ -1,0 +1,35 @@
+#eventsList{
+  height: 60vh;
+  min-height: 30vh;
+}
+
+.skeleton-line, .skeleton-title, .skeleton-img {
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.2s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-img {
+  height: 150px;
+  width: 100%;
+}
+
+.skeleton-title {
+  height: 20px;
+  width: 60%;
+}
+
+.skeleton-line {
+  height: 14px;
+  width: 100%;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

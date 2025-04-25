@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-md p-0">
+  <!-- Logo -->
+  <a class="navbar-brand p-0" href="">
+    <img src="assets/css/logoEasyMeet.png" alt="Logo" class="d-inline-block align-top logo">
+  </a>
+
+  <!-- Menú Burger -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Menú -->
+  <div class="collapse navbar-collapse h-100 me-2" id="navbarNavDropdown">
+    <ul class="navbar-nav ms-auto align-items-stretch h-100 me-2">
+      <a href="/eventos" class="btn btnNav rounded-end-0 d-flex align-items-center">Eventos</a>
+      <a href="#" class="btn btnNav rounded-0 d-flex align-items-center">¿Quiénes somos?</a>
+      <a href="#" class="btn btnNav rounded-0 d-flex align-items-center">Contacto</a>
+      <a href="#" class="btn btnNav rounded-start-0 d-flex align-items-center">Colabora</a>
+      @if (authService.isAuthenticated()) {
+        <li class="nav-item dropdown ms-2 px-1 d-flex align-items-center btnNav rounded-1">
+          <button class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+            <img ngSrc="assets/css/usuario.png" alt="foto de usuario" height="50" width="50">
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+            <li><a class="dropdown-item" href="#">Mis eventos</a></li>
+            <li (click)="onLogout()"><a class="dropdown-item">Logout</a></li>
+          </ul>
+        </li>
+      } @else {
+        <a href="/login" class="btn btnNav rounded-end-0 ms-2 d-flex align-items-center">Iniciar Sesión</a>
+        <a href="/registro" class="btn btnNav rounded-start-0 d-flex align-items-center">Registrarse</a>
+      }
+    </ul>
+  </div>
+</nav>

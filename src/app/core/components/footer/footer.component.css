@@ -1,0 +1,16 @@
+footer div div img {
+  width: 30px;
+}
+
+footer li a {
+  text-decoration: none;
+  color: black;
+}
+
+footer li a:hover {
+  color: white;
+}
+
+footer {
+  background-color: var(--moss-green);
+}
