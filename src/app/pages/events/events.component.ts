@@ -7,6 +7,7 @@ import {Category} from './interfaces/Category.interface';
 import {EventsService} from './services/events.service';
 import {Subcategory} from './interfaces/Subcategory.interface';
 import {MyEvent} from './interfaces/MyEvent.interface';
+import {ButtonCreateEventComponent} from './components/button-create-event/button-create-event.component';
 
 @Component({
   selector: 'pages-events',
@@ -14,7 +15,8 @@ import {MyEvent} from './interfaces/MyEvent.interface';
     LocationMapComponent,
     EventImgComponent,
     EventFilterComponent,
-    EventsListComponent
+    EventsListComponent,
+    ButtonCreateEventComponent
   ],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
