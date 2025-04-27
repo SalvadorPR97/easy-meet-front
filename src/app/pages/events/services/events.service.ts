@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Category} from '../interfaces/Category.interface';
 import {Subcategory} from '../interfaces/Subcategory.interface';
 import {MyEvent} from '../interfaces/MyEvent.interface';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class EventsService {
   constructor(private readonly http: HttpClient) {
   }
 
-  private readonly apiUrl = 'http://localhost:8000/api/';
+  private readonly apiUrl = environment.apiUrl;
 
   public getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.apiUrl}categories`);
