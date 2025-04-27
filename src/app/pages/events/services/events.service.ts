@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {Category} from '../interfaces/Category.interface';
 import {Subcategory} from '../interfaces/Subcategory.interface';
 import {MyEvent} from '../interfaces/MyEvent.interface';
-import {environment} from '../../../../environments/environments';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
