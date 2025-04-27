@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {environment} from '../../../environments/environments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiUrl = 'http://localhost:8000/api/'; // o la URL de tu backend
+  private readonly apiUrl = environment.apiUrl; // o la URL de tu backend
 
   constructor(private readonly http: HttpClient) {}
 
@@ -35,6 +36,6 @@ export class AuthService {
   }
 
   getUserInfo() {
-    return this.http.get('http://localhost:8000/api/user'); // protegido con Sanctum
+    return this.http.get(`${this.apiUrl}user`);
   }
 }
