@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,5 +11,15 @@ export class CommunicationEventsService {
 
   emitEventId(id: number) {
     this.eventIdSource.next(id);
+  }
+
+  private readonly eventsJoinedIds = new BehaviorSubject<number[]>([]);
+
+  getEventsJoinedIds() {
+    return this.eventsJoinedIds.asObservable();
+  }
+
+  setEventsJoinedIds(data: any) {
+    this.eventsJoinedIds.next(data);
   }
 }

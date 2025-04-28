@@ -30,4 +30,7 @@ export class EventsService {
   public joinEvent(id: number): Observable<any> {
     return this.http.post(`${this.apiUrl}eventsUsers/join/${id}`, {});
   }
+  public getJoinedEvents(): Observable<any> {
+    return this.http.get(`${this.apiUrl}eventsUsers/joined`);
+  }
 }

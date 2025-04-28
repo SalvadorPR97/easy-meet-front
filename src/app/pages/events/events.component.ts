@@ -28,6 +28,7 @@ export class EventsComponent {
   public categories: Category[] = [];
   public subcategories: Subcategory[] = [];
   public events: MyEvent[] = [];
+  public joinedEventsIds: number[] = [];
   public loading = true;
 
   constructor(public eventsService: EventsService, public communicationEventsService: CommunicationEventsService,
@@ -49,6 +50,15 @@ export class EventsComponent {
     this.communicationEventsService.eventId$.subscribe((id: number) => {
       this.joinEvent(id);
     });
+    if (this.authService.isAuthenticated()) {
+      this.eventsService.getJoinedEvents().subscribe(
+        (res) => {
+          res = res.events;
+          this.joinedEventsIds = res.map((event: { id: number; }) => event.id);
+          this.communicationEventsService.setEventsJoinedIds(this.joinedEventsIds);
+        }
+      );
+    }
   }
 
   public getSubcategories(category_id: string) {
@@ -63,7 +73,7 @@ export class EventsComponent {
     if (this.authService.isAuthenticated()) {
       this.eventsService.joinEvent(id).subscribe({
         next: () => {
-          this.router.navigate(['/eventos']);
+          window.location.reload();
         },
         error: (err) => {
           console.log(err)

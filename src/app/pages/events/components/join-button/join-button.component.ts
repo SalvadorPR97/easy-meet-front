@@ -12,10 +12,22 @@ export class JoinButtonComponent {
   @Input()
   public eventId: number = 0;
 
+  public eventsJoined: number[] = [];
+
   constructor(public communicationEventsService: CommunicationEventsService) {
   }
 
   sendEventId() {
     this.communicationEventsService.emitEventId(this.eventId);
+  }
+
+  ngOnInit() {
+    this.communicationEventsService.getEventsJoinedIds().subscribe(eventsJoined => {
+      this.eventsJoined = eventsJoined;
+    })
+  }
+
+  isJoined() {
+    return this.eventsJoined.includes(this.eventId);
   }
 }
