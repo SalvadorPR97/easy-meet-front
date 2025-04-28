@@ -27,4 +27,7 @@ export class EventsService {
   public getEventsByCity(city: string): Observable<{ events: MyEvent[] }> {
     return this.http.get<{ events: MyEvent[] }>(`${this.apiUrl}events/${city}`);
   }
+  public joinEvent(id: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}eventsUsers/join/${id}`, {});
+  }
 }
