@@ -43,12 +43,12 @@
       <input type="date" class="form-control" id="birthdate" formControlName="birthdate" [max]="maxDate" required>
     </div>
     <button type="submit" data-bs-toggle="modal" data-bs-target="#createUserModal"
-            [disabled]="this.registerForm.invalid" class="btn btnForm mb-3 mb-lg-0">
+            [disabled]="this.registerForm.invalid" class="btn myBtn mb-3 mb-lg-0">
       Registrarse
     </button>
     @if (sending) {
       <span class="d-inline-block mb-3 mb-lg-0" data-bs-toggle="tooltip">
-        <button class="btn btnForm" type="button" disabled>
+        <button class="btn myBtn" type="button" disabled>
             <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
             Creando...
         </button>

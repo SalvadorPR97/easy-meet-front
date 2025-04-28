@@ -74,7 +74,7 @@ footer {
 label{
   font-weight: bold;
 }
-.btnForm{
+.myBtn{
   background-color: var(--moss-green) !important;
   color: white !important;
 }

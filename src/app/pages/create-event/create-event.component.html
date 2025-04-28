@@ -1,4 +1,4 @@
-<main class="container-fluid d-flex justify-content-between align-items-center gap-5 my-3 formBg">
+<main class="container-fluid d-flex justify-content-between align-items-center gap-5 my-2 wheatBg">
   <form class="col-6 m-2" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
     <h3 class="text-center">Nuevo Evento</h3>
 
@@ -86,7 +86,7 @@
       <textarea class="form-control" formControlName="description" rows="3"></textarea>
     </div>
 
-    <button type="submit" class="btn btnForm mb-3 mb-lg-0" [disabled]="eventForm.invalid" data-bs-toggle="modal"
+    <button type="submit" class="btn myBtn mb-3 mb-lg-0" [disabled]="eventForm.invalid" data-bs-toggle="modal"
             data-bs-target="#createEventModal">
       Crear Evento
     </button>
@@ -94,7 +94,7 @@
     @if (sending) {
       <span class="d-inline-block mb-3 mb-lg-0" data-bs-toggle="tooltip"
             title="Creando y publicando evento, por favor espere">
-        <button class="btn btnForm" type="button" disabled>
+        <button class="btn myBtn" type="button" disabled>
             <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
             Creando...
         </button>
