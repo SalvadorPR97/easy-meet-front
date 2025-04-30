@@ -31,11 +31,15 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
+  setUserInfo(user: any): void {
+    localStorage.setItem('city', user.city);
+  }
+
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
 
-  getUserInfo() {
+  getUserInfo(): Observable<any> {
     return this.http.get(`${this.apiUrl}user`);
   }
 }

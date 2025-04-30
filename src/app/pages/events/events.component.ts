@@ -48,16 +48,15 @@ export class EventsComponent {
         this.categories = res;
       }
     );
-    this.eventsService.getEventsByCity("Málaga").subscribe(
-      (res) => {
-        this.events = res.events;
-        this.loading = false;
-      }
-    );
     this.communicationEventsService.eventId$.subscribe((id: number) => {
       this.joinEvent(id);
     });
     if (this.authService.isAuthenticated()) {
+      console.log(localStorage.getItem('city'));
+      const city: string | null = localStorage.getItem('city');
+      if (city) {
+        this.getEventsByCity(city);
+      }
       this.eventsService.getJoinedEvents().subscribe(
         (res) => {
           res = res.events;
@@ -65,6 +64,8 @@ export class EventsComponent {
           this.communicationEventsService.setEventsJoinedIds(this.joinedEventsIds);
         }
       );
+    } else {
+      this.getEventsByCity("Marbella");
     }
   }
 
@@ -79,12 +80,12 @@ export class EventsComponent {
   joinEvent(id: number) {
     if (this.authService.isAuthenticated()) {
       this.eventsService.joinEvent(id).subscribe({
-        next: () => {
-          window.location.reload();
-        },
-        error: (err) => {
-          console.log(err)
-        }
+          next: () => {
+            window.location.reload();
+          },
+          error: (err) => {
+            console.log(err)
+          }
         }
       );
     } else {
@@ -103,5 +104,17 @@ export class EventsComponent {
       }
     );
 
+  }
+
+  getEventsByCity(city: string) {
+    this.events = [];
+    this.loading = true;
+    this.eventsService.getEventsByCity(city).subscribe(
+      (res) => {
+        console.log(res);
+        this.events = res.events;
+        this.loading = false;
+      }
+    )
   }
 }
