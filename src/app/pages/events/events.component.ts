@@ -52,7 +52,6 @@ export class EventsComponent {
       this.joinEvent(id);
     });
     if (this.authService.isAuthenticated()) {
-      console.log(localStorage.getItem('city'));
       const city: string | null = localStorage.getItem('city');
       if (city) {
         this.getEventsByCity(city);
@@ -111,7 +110,6 @@ export class EventsComponent {
     this.loading = true;
     this.eventsService.getEventsByCity(city).subscribe(
       (res) => {
-        console.log(res);
         this.events = res.events;
         this.loading = false;
       }
