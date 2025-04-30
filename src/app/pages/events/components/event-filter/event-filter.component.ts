@@ -24,12 +24,17 @@ export class EventFilterComponent {
   @Input()
   public subcategories: Subcategory[] = [];
   @Output()
-  public categoryIdEmitter: EventEmitter<string> = new EventEmitter<string>();
+  public categoryIdEmitter: EventEmitter<number> = new EventEmitter<number>();
+  @Output()
+  public subcategoryIdEmitter: EventEmitter<number> = new EventEmitter<number>();
   @Output()
   public cityNameEmitter: EventEmitter<string> = new EventEmitter<string>();
 
-  emitCategoryId(category_id: string): void {
+  emitCategoryId(category_id: number): void {
     this.categoryIdEmitter.emit(category_id);
+  }
+  emitSubcategoryId(subcategory_id: number): void {
+    this.subcategoryIdEmitter.emit(subcategory_id);
   }
   emitCityName(city_name: string): void {
     this.cityNameEmitter.emit(city_name);

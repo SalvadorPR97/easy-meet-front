@@ -12,6 +12,7 @@ import {CommunicationEventsService} from './services/communication-events.servic
 import {AuthService} from '../../core/services/auth.service';
 import {Router} from '@angular/router';
 import {City} from './interfaces/City.interface';
+import {EventsFilters} from './interfaces/EventsFilters.interface';
 
 @Component({
   selector: 'pages-events',
@@ -32,6 +33,7 @@ export class EventsComponent {
   public events: MyEvent[] = [];
   public joinedEventsIds: number[] = [];
   public loading = true;
+  public filters: EventsFilters = {};
 
   constructor(public eventsService: EventsService, public communicationEventsService: CommunicationEventsService,
               public authService: AuthService, public router: Router) {
@@ -68,8 +70,8 @@ export class EventsComponent {
     }
   }
 
-  public getSubcategories(category_id: string) {
-    this.eventsService.getSubcategories(Number(category_id)).subscribe(
+  public getSubcategories(category_id: number) {
+    this.eventsService.getSubcategories(category_id).subscribe(
       (res) => {
         this.subcategories = res;
       }
@@ -92,8 +94,7 @@ export class EventsComponent {
     }
   }
 
-  filterByCity(city: string) {
-    console.log(city);
+  getEventsByCity(city: string) {
     this.events = [];
     this.loading = true;
     this.eventsService.getEventsByCity(city).subscribe(
@@ -101,14 +102,32 @@ export class EventsComponent {
         this.events = res.events;
         this.loading = false;
       }
-    );
-
+    )
   }
 
-  getEventsByCity(city: string) {
+  categoryReceived(category_id: number) {
+    this.getSubcategories(category_id);
+    this.addCategoryToFilter(category_id);
+  }
+
+  addCityToFilter(city: string) {
+    this.filters.city = city;
+    this.filterEvents();
+  }
+  addCategoryToFilter(category_id: number) {
+    this.filters.category_id = category_id;
+    this.filterEvents();
+  }
+  addSubcategoryToFilter(subcategory_id: number) {
+    this.filters.subcategory_id = subcategory_id;
+    this.filterEvents();
+  }
+
+  filterEvents() {
+    console.log(this.filters);
     this.events = [];
     this.loading = true;
-    this.eventsService.getEventsByCity(city).subscribe(
+    this.eventsService.filterEvents(this.filters).subscribe(
       (res) => {
         this.events = res.events;
         this.loading = false;

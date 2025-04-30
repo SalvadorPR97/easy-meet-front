@@ -5,8 +5,9 @@
       <pages-events-button-create-event></pages-events-button-create-event>
     </div>
     <pages-events-event-filter [categories]="this.categories" [subcategories]="this.subcategories"
-                               [cities]="this.cities" (cityNameEmitter)="filterByCity($event)"
-                               (categoryIdEmitter)="getSubcategories($event)"></pages-events-event-filter>
+                               [cities]="this.cities" (cityNameEmitter)="addCityToFilter($event)"
+                               (categoryIdEmitter)="categoryReceived($event)"
+                               (subcategoryIdEmitter)="addSubcategoryToFilter($event)"></pages-events-event-filter>
     <pages-events-events-list [events]="this.events" [loading]="this.loading"></pages-events-events-list>
   </div>
   <div class="d-flex flex-column justify-content-center col-5 me-auto ms-5 gap-2 py-2">

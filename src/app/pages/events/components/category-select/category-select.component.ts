@@ -15,11 +15,11 @@ export class CategorySelectComponent {
   public categories: Category[] = [];
 
   @Output()
-  public categorySelectedEmitter: EventEmitter<string> = new EventEmitter<string>();
+  public categorySelectedEmitter: EventEmitter<number> = new EventEmitter<number>();
 
   emitCategorySelected(event: Event): void {
     const target = event.target as HTMLSelectElement;
-    this.categorySelectedEmitter.emit(target.value);
+    this.categorySelectedEmitter.emit(Number(target.value));
   }
 
 
