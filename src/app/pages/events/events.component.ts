@@ -11,6 +11,7 @@ import {ButtonCreateEventComponent} from './components/button-create-event/butto
 import {CommunicationEventsService} from './services/communication-events.service';
 import {AuthService} from '../../core/services/auth.service';
 import {Router} from '@angular/router';
+import {City} from './interfaces/City.interface';
 
 @Component({
   selector: 'pages-events',
@@ -27,6 +28,7 @@ import {Router} from '@angular/router';
 export class EventsComponent {
   public categories: Category[] = [];
   public subcategories: Subcategory[] = [];
+  public cities: City[] = [];
   public events: MyEvent[] = [];
   public joinedEventsIds: number[] = [];
   public loading = true;
@@ -36,6 +38,11 @@ export class EventsComponent {
   }
 
   ngOnInit() {
+    this.eventsService.getCities().subscribe(
+      (res) => {
+        this.cities = res.cities;
+      }
+    );
     this.eventsService.getCategories().subscribe(
       (res) => {
         this.categories = res;
@@ -83,5 +90,18 @@ export class EventsComponent {
     } else {
       this.router.navigate(['/login'])
     }
+  }
+
+  filterByCity(city: string) {
+    console.log(city);
+    this.events = [];
+    this.loading = true;
+    this.eventsService.getEventsByCity(city).subscribe(
+      (res) => {
+        this.events = res.events;
+        this.loading = false;
+      }
+    );
+
   }
 }

@@ -5,6 +5,7 @@
       <pages-events-button-create-event></pages-events-button-create-event>
     </div>
     <pages-events-event-filter [categories]="this.categories" [subcategories]="this.subcategories"
+                               [cities]="this.cities" (cityNameEmitter)="filterByCity($event)"
                                (categoryIdEmitter)="getSubcategories($event)"></pages-events-event-filter>
     <pages-events-events-list [events]="this.events" [loading]="this.loading"></pages-events-events-list>
   </div>

@@ -1,0 +1,9 @@
+<div class="mb-3">
+  <label class="form-label" for="category_id">Categoría Principal</label>
+  <select class="form-select" (change)="emitCitySelected($event)">
+    <option value="" disabled selected>Seleccione Categoría…</option>
+    @for (city of this.cities; track city.name) {
+      <option [value]="city.name">{{ city.name }} ({{city.count}})</option>
+    }
+  </select>
+</div>

@@ -5,6 +5,7 @@ import {Category} from '../interfaces/Category.interface';
 import {Subcategory} from '../interfaces/Subcategory.interface';
 import {MyEvent} from '../interfaces/MyEvent.interface';
 import {environment} from '../../../../environments/environment';
+import {City} from '../interfaces/City.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,8 @@ export class EventsService {
   }
   public getJoinedEvents(): Observable<any> {
     return this.http.get(`${this.apiUrl}eventsUsers/joined`);
+  }
+  public getCities(): Observable<{ cities: City[] }> {
+    return this.http.get<{ cities: City[]}>(`${this.apiUrl}cities`);
   }
 }
