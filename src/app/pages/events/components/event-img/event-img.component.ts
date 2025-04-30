@@ -8,6 +8,5 @@ import {Component, Input} from '@angular/core';
 })
 export class EventImgComponent {
   @Input()
-  eventImg: string = "assets/img/fotoGrupoParque.jpg";
-  //TODO que se actualice con la imagen del evento
+  public eventImg!: string | ArrayBuffer | null ;
 }

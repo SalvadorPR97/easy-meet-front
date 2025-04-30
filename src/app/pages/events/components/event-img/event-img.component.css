@@ -1,0 +1,9 @@
+:host{
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  max-width: 780px;
+  height: 450px;
+}

@@ -37,7 +37,7 @@
 
     <div class="mb-3">
       <label class="form-label" for="event_image">Imagen</label>
-      <input type="file" class="form-control" accept="image/*" formControlName="event_image">
+      <input type="file" (change)="onImageSelected($event)" class="form-control" accept="image/*" formControlName="event_image">
     </div>
 
     <div class="row d-flex align-items-center">
@@ -120,7 +120,7 @@
   </form>
 
   <div class="d-flex flex-column justify-content-center col-5 me-auto ms-5 gap-2 py-2">
+    <pages-events-event-img [eventImg]="this.imgUrl"></pages-events-event-img>
     <pages-events-location-map></pages-events-location-map>
-    <pages-events-event-img></pages-events-event-img>
   </div>
 </main>

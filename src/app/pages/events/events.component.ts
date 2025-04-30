@@ -34,6 +34,7 @@ export class EventsComponent {
   public joinedEventsIds: number[] = [];
   public loading = true;
   public filters: EventsFilters = {};
+  public imgUrl: string | ArrayBuffer | null  = "assets/img/fotoGrupoParque.jpg";
 
   constructor(public eventsService: EventsService, public communicationEventsService: CommunicationEventsService,
               public authService: AuthService, public router: Router) {
@@ -124,7 +125,6 @@ export class EventsComponent {
   }
 
   filterEvents() {
-    console.log(this.filters);
     this.events = [];
     this.loading = true;
     this.eventsService.filterEvents(this.filters).subscribe(
@@ -133,5 +133,9 @@ export class EventsComponent {
         this.loading = false;
       }
     )
+  }
+  chargeEventImg(event_image_url: string) {
+    console.log(event_image_url);
+    this.imgUrl = event_image_url;
   }
 }

@@ -24,6 +24,7 @@ export class CreateEventComponent {
 
   public categories: Category[] = [];
   public subcategories: Subcategory[] = [];
+  public imgUrl: string | ArrayBuffer | null  = "assets/img/fotoGrupoParque.jpg";
   public minDate!: string;
   public sending: boolean = false;
   public eventForm: FormGroup;
@@ -89,6 +90,18 @@ export class CreateEventComponent {
     } else {
       this.eventForm.patchValue({ only_men: !this.eventForm.get('only_men')?.value, only_women: false });
     }
+  }
+
+  onImageSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imgUrl = reader.result;
+    };
+    reader.readAsDataURL(file);
+    console.log(this.imgUrl);
   }
 
   protected readonly HTMLSelectElement = HTMLSelectElement;
