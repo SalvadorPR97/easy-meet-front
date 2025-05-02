@@ -12,7 +12,7 @@ export class CreateEventService {
   constructor(private readonly http: HttpClient) { }
   private apiUrl: string = environment.apiUrl;
 
-  public postEvent(event: MyEvent): Observable<MyEvent> {
+  public postEvent(event: FormData): Observable<MyEvent> {
     return this.http.post<MyEvent>(`${this.apiUrl}events/store`, event);
   }
 }

@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MyEvent} from '../../interfaces/MyEvent.interface';
 import {JoinButtonComponent} from '../join-button/join-button.component';
+import {environment} from '../../../../../environments/environment';
+
 
 @Component({
   selector: 'pages-events-event-card',
@@ -16,7 +18,11 @@ export class EventCardComponent {
   @Output()
   public eventImgUrlEmitter: EventEmitter<string> = new EventEmitter<string>();
 
+  public apiUrl = environment.apiUrl;
+
   emitEvent(event_image_url: string): void {
     this.eventImgUrlEmitter.emit(event_image_url);
   }
+
+  protected readonly environment = environment;
 }

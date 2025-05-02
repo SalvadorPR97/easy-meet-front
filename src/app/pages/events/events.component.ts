@@ -84,9 +84,6 @@ export class EventsComponent {
       this.eventsService.joinEvent(id).subscribe({
           next: () => {
             window.location.reload();
-          },
-          error: (err) => {
-            console.log(err)
           }
         }
       );
@@ -135,7 +132,6 @@ export class EventsComponent {
     )
   }
   chargeEventImg(event_image_url: string) {
-    console.log(event_image_url);
-    this.imgUrl = event_image_url;
+    this.imgUrl = 'http://localhost:8000' + event_image_url;
   }
 }

@@ -1,7 +1,7 @@
 <div class="card mb-2" (click)="emitEvent(this.event.image_url)">
   <div class="row g-0 gap-4 d-flex align-items-center">
     <div class="col-4">
-      <img src="assets/img/selfieCine.jpg" class="img-fluid rounded-2 m-2" alt="picture of an event">
+      <img src="http://localhost:8000{{this.event.image_url}}" class="img-fluid rounded-2 m-2" alt="picture of an event">
     </div>
     <div class="col-7">
       <div class="card-body">
@@ -21,7 +21,7 @@
           <div class="col-4">
             <p class="card-text">Mín Personas: {{this.event.min_participants}}<span id="date"></span></p>
             <p class="card-text">Máx Personas: {{this.event.max_participants}}<span id="date"></span></p>
-            <p class="card-text">Precio: {{this.event.price}}<span id="time"></span></p>
+            <p class="card-text">Precio: {{this.event.price}}€<span id="time"></span></p>
           <pages-events-join-button [eventId]="this.event.id"></pages-events-join-button>
           </div>
         </div>

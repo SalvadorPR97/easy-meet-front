@@ -28,6 +28,7 @@ export class CreateEventComponent {
   public minDate!: string;
   public sending: boolean = false;
   public eventForm: FormGroup;
+  public selectedImage: File | null = null;
 
   constructor(public eventsService: EventsService,public createEventService: CreateEventService, private readonly fb: FormBuilder, public router: Router) {
     this.eventForm = this.fb.group({
@@ -35,7 +36,7 @@ export class CreateEventComponent {
       subcategory_id: ['', Validators.required],
       title: ['', Validators.required],
       location: ['', Validators.required],
-      event_image: [null],
+      image: [null],
       date: ['', [Validators.required, dateNotInThePastValidator()]],
       start_time: ['', Validators.required],
       end_time: [''],
@@ -78,7 +79,11 @@ export class CreateEventComponent {
     if (this.eventForm.valid) {
       this.sending = true;
       this.eventForm.addControl('city', this.fb.control('Málaga'));
-      this.createEventService.postEvent(this.eventForm.value).subscribe();
+      const formData = this.buildFormData();
+      this.createEventService.postEvent(formData).subscribe(
+        (res) => { console.log(res);
+        }
+      );
     } else {
       this.eventForm.markAllAsTouched();
     }
@@ -101,7 +106,22 @@ export class CreateEventComponent {
       this.imgUrl = reader.result;
     };
     reader.readAsDataURL(file);
-    console.log(this.imgUrl);
+    this.selectedImage = file;
+  }
+
+  private buildFormData(): FormData {
+    const formData = new FormData();
+    const form = this.eventForm.value;
+
+    for (const key in form) {
+      if (form[key] !== null && form[key] !== undefined) {
+        formData.append(key, form[key]);
+      }
+    }
+    if (this.selectedImage) {
+      formData.append('image', this.selectedImage);
+    }
+    return formData;
   }
 
   protected readonly HTMLSelectElement = HTMLSelectElement;
