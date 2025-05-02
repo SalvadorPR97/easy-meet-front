@@ -54,6 +54,9 @@ export class EventsComponent {
     this.communicationEventsService.eventId$.subscribe((id: number) => {
       this.joinEvent(id);
     });
+    this.communicationEventsService.eventIdToDelete$.subscribe((id: number) => {
+      console.log(id);
+    })
     if (this.authService.isAuthenticated()) {
       const city: string | null = localStorage.getItem('city');
       if (city) {

@@ -9,8 +9,15 @@ export class CommunicationEventsService {
   private readonly eventIdSource = new Subject<number>();
   eventId$ = this.eventIdSource.asObservable();
 
+  private readonly eventIdSourceToDelete = new Subject<number>();
+  eventIdToDelete$ = this.eventIdSourceToDelete.asObservable();
+
   emitEventId(id: number) {
     this.eventIdSource.next(id);
+  }
+
+  emitEventIdToDelete(id: number) {
+    this.eventIdSourceToDelete.next(id);
   }
 
   private readonly eventsJoinedIds = new BehaviorSubject<number[]>([]);

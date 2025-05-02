@@ -33,6 +33,7 @@ export class AuthService {
 
   setUserInfo(user: any): void {
     localStorage.setItem('city', user.city);
+    localStorage.setItem('userId', user.id);
   }
 
   isAuthenticated(): boolean {
