@@ -6,6 +6,7 @@ import {EventsComponent} from './pages/events/events.component';
 import {guestGuard} from './core/guards/guest.guard';
 import {CreateEventComponent} from './pages/create-event/create-event.component';
 import {authGuard} from './core/guards/auth.guard';
+import {MyEventsComponent} from './pages/my-events/my-events.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent},
@@ -13,4 +14,5 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [guestGuard]},
   { path: 'eventos', component: EventsComponent},
   { path: 'eventos/crear', component: CreateEventComponent, canActivate: [authGuard]},
+  { path: 'mis-eventos', component: MyEventsComponent, canActivate: [authGuard]},
 ];
