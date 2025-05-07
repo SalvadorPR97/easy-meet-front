@@ -13,6 +13,7 @@ import {AuthService} from '../../core/services/auth.service';
 import {Router} from '@angular/router';
 import {City} from './interfaces/City.interface';
 import {EventsFilters} from './interfaces/EventsFilters.interface';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'pages-events',
@@ -35,6 +36,7 @@ export class EventsComponent {
   public loading = true;
   public filters: EventsFilters = {};
   public imgUrl: string | ArrayBuffer | null  = "assets/img/fotoGrupoParque.jpg";
+  public serverImgUrl: string = environment.imgUrl;
 
   constructor(public eventsService: EventsService, public communicationEventsService: CommunicationEventsService,
               public authService: AuthService, public router: Router) {
@@ -136,6 +138,6 @@ export class EventsComponent {
     )
   }
   chargeEventImg(event_image_url: string) {
-    this.imgUrl = 'http://localhost:8000' + event_image_url;
+    this.imgUrl = this.serverImgUrl + event_image_url;
   }
 }

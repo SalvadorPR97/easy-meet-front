@@ -20,7 +20,7 @@ export class EventCardComponent {
   @Output()
   public eventImgUrlEmitter: EventEmitter<string> = new EventEmitter<string>();
 
-  public apiUrl = environment.apiUrl;
+  public imgUrl = environment.imgUrl;
 
   emitEvent(event_image_url: string): void {
     this.eventImgUrlEmitter.emit(event_image_url);
