@@ -18,12 +18,12 @@ export class EventCardComponent {
   @Input()
   public event!: MyEvent;
   @Output()
-  public eventImgUrlEmitter: EventEmitter<string> = new EventEmitter<string>();
+  public eventImgUrlEmitter: EventEmitter<MyEvent> = new EventEmitter<MyEvent>();
 
   public imgUrl = environment.imgUrl;
 
-  emitEvent(event_image_url: string): void {
-    this.eventImgUrlEmitter.emit(event_image_url);
+  emitEvent(): void {
+    this.eventImgUrlEmitter.emit(this.event);
   }
 
   protected readonly environment = environment;

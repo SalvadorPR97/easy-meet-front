@@ -15,6 +15,8 @@ import {City} from './interfaces/City.interface';
 import {EventsFilters} from './interfaces/EventsFilters.interface';
 import {environment} from '../../../environments/environment';
 
+declare const bootstrap: any;
+
 @Component({
   selector: 'pages-events',
   imports: [
@@ -35,8 +37,10 @@ export class EventsComponent {
   public joinedEventsIds: number[] = [];
   public loading = true;
   public filters: EventsFilters = {};
-  public imgUrl: string | ArrayBuffer | null  = "assets/img/fotoGrupoParque.jpg";
+  public imgUrl: string | ArrayBuffer | null = "assets/img/fotoGrupoParque.jpg";
   public serverImgUrl: string = environment.imgUrl;
+  public selectedEventIdToDelete: number = 0;
+  public deleting: boolean = false;
 
   constructor(public eventsService: EventsService, public communicationEventsService: CommunicationEventsService,
               public authService: AuthService, public router: Router) {
@@ -57,8 +61,9 @@ export class EventsComponent {
       this.joinEvent(id);
     });
     this.communicationEventsService.eventIdToDelete$.subscribe((id: number) => {
-      //TODO delete events
-      console.log(id);
+      this.selectedEventIdToDelete = id;
+      const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal')!);
+      modal.show();
     })
     if (this.authService.isAuthenticated()) {
       const city: string | null = localStorage.getItem('city');
@@ -118,10 +123,12 @@ export class EventsComponent {
     this.filters.city = city;
     this.filterEvents();
   }
+
   addCategoryToFilter(category_id: number) {
     this.filters.category_id = category_id;
     this.filterEvents();
   }
+
   addSubcategoryToFilter(subcategory_id: number) {
     this.filters.subcategory_id = subcategory_id;
     this.filterEvents();
@@ -137,7 +144,17 @@ export class EventsComponent {
       }
     )
   }
-  chargeEventImg(event_image_url: string) {
-    this.imgUrl = this.serverImgUrl + event_image_url;
+
+  chargeEvent(event: MyEvent) {
+    this.imgUrl = this.serverImgUrl + event.image_url;
+  }
+
+  confirmDelete() {
+    this.deleting = true;
+    this.eventsService.deleteEvent(this.selectedEventIdToDelete).subscribe(
+      () => {
+        window.location.reload();
+      }
+    );
   }
 }

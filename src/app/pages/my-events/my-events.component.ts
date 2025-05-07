@@ -11,9 +11,10 @@ import {MyEvent} from '../events/interfaces/MyEvent.interface';
 import {EventsFilters} from '../events/interfaces/EventsFilters.interface';
 import {EventsService} from '../events/services/events.service';
 import {CommunicationEventsService} from '../events/services/communication-events.service';
-import {AuthService} from '../../core/services/auth.service';
 import {Router} from '@angular/router';
 import { environment } from '../../../environments/environment';
+
+declare const bootstrap: any;
 
 @Component({
   selector: 'pages-my-events',
@@ -38,9 +39,11 @@ export class MyEventsComponent {
   public filters: EventsFilters = {};
   public imgUrl: string | ArrayBuffer | null  = "assets/img/fotoGrupoParque.jpg";
   public serverImgUrl: string = environment.imgUrl;
+  public selectedEventIdToDelete: number = 0;
+  public deleting: boolean = false;
 
   constructor(public eventsService: EventsService, public communicationEventsService: CommunicationEventsService,
-              public authService: AuthService, public router: Router) {
+              public router: Router) {
   }
 
   ngOnInit() {
@@ -54,12 +57,10 @@ export class MyEventsComponent {
         this.categories = res;
       }
     );
-    this.communicationEventsService.eventId$.subscribe((id: number) => {
-      this.joinEvent(id);
-    });
     this.communicationEventsService.eventIdToDelete$.subscribe((id: number) => {
-      //TODO delete events
-      console.log(id);
+      this.selectedEventIdToDelete = id;
+      const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModalMyEvents')!);
+      modal.show();
     })
     this.eventsService.getEventsByUser().subscribe(
       res => {
@@ -96,30 +97,6 @@ export class MyEventsComponent {
     );
   }
 
-  joinEvent(id: number) {
-    if (this.authService.isAuthenticated()) {
-      this.eventsService.joinEvent(id).subscribe({
-          next: () => {
-            window.location.reload();
-          }
-        }
-      );
-    } else {
-      this.router.navigate(['/login'])
-    }
-  }
-
-  getEventsByCity(city: string) {
-    this.events = [];
-    this.loading = true;
-    this.eventsService.getEventsByCity(city).subscribe(
-      (res) => {
-        this.events = res.events;
-        this.loading = false;
-      }
-    )
-  }
-
   categoryReceived(category_id: number) {
     this.getSubcategories(category_id);
     this.addCategoryToFilter(category_id);
@@ -148,7 +125,16 @@ export class MyEventsComponent {
       }
     )
   }
-  chargeEventImg(event_image_url: string) {
-    this.imgUrl = this.serverImgUrl + event_image_url;
+  chargeEventImg(event: MyEvent) {
+    this.imgUrl = this.serverImgUrl + event.image_url;
+  }
+
+  confirmDelete() {
+    this.deleting = true;
+    this.eventsService.deleteEvent(this.selectedEventIdToDelete).subscribe(
+      () => {
+        window.location.reload();
+      }
+    );
   }
 }

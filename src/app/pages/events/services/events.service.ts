@@ -52,4 +52,7 @@ export class EventsService {
   public getEventsByUser(): Observable<MyEventRes> {
     return this.http.get<MyEventRes>(`${this.apiUrl}events/userEvents`);
   }
+  public deleteEvent(id: number): Observable<{message: string}> {
+    return this.http.delete<{message: string}>(`${this.apiUrl}events/delete/${id}`);
+  }
 }

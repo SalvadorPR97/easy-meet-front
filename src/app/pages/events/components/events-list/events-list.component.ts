@@ -14,12 +14,12 @@ export class EventsListComponent {
   @Input()
   public events: MyEvent[] = [];
   @Output()
-  public eventImgUrlEmitter: EventEmitter<string> = new EventEmitter<string>();
+  public eventImgUrlEmitter: EventEmitter<MyEvent> = new EventEmitter<MyEvent>();
   @Input()
   loading = true;
   skeletons = Array(3);
 
-  emitEventImgUrl(event_image_url: string): void {
-    this.eventImgUrlEmitter.emit(event_image_url);
+  emitEventImgUrl(event: MyEvent): void {
+    this.eventImgUrlEmitter.emit(event);
   }
 }

@@ -78,12 +78,9 @@ export class CreateEventComponent {
   onSubmit() {
     if (this.eventForm.valid) {
       this.sending = true;
-      this.eventForm.addControl('city', this.fb.control('Málaga'));
+      this.eventForm.addControl('city', this.fb.control(localStorage.getItem('city')));
       const formData = this.buildFormData();
-      this.createEventService.postEvent(formData).subscribe(
-        (res) => { console.log(res);
-        }
-      );
+      this.createEventService.postEvent(formData).subscribe();
     } else {
       this.eventForm.markAllAsTouched();
     }
