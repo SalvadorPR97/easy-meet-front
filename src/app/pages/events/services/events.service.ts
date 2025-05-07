@@ -49,4 +49,7 @@ export class EventsService {
 
     return this.http.get<MyEventRes>(`${this.apiUrl}events/filter`, { params });
   }
+  public getEventsByUser(): Observable<MyEventRes> {
+    return this.http.get<MyEventRes>(`${this.apiUrl}events/userEvents`);
+  }
 }

@@ -23,7 +23,7 @@
             <p class="card-text">Mín Personas: {{ this.event.min_participants }}<span id="date"></span></p>
             <p class="card-text">Máx Personas: {{ this.event.max_participants }}<span id="date"></span></p>
             <p class="card-text">Precio: {{ this.event.price }}€<span id="time"></span></p>
-            <pages-events-join-button [eventId]="this.event.id" class="me-1"></pages-events-join-button>
+            <pages-events-join-button [event]="this.event" class="me-1"></pages-events-join-button>
             <pages-events-delete-button [event]="this.event" class="me-1"></pages-events-delete-button>
           </div>
         </div>

@@ -19,7 +19,13 @@ export class DeleteButtonComponent {
     this.communicationEventsService.emitEventIdToDelete(this.event.id);
   }
 
-  isOwner() {
-    return this.event.owner_id != Number(localStorage.getItem('userId'));
+  hideButton() {
+    const today = new Date();
+    const eventDateTime = new Date(`${this.event.date}T${this.event.start_time}`)
+    if (eventDateTime < today) {
+      return true;
+    } else {
+      return this.event.owner_id != Number(localStorage.getItem('userId'));
+    }
   }
 }

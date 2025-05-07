@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {CommunicationEventsService} from '../../services/communication-events.service';
+import {MyEvent} from '../../interfaces/MyEvent.interface';
 
 @Component({
   selector: 'pages-events-join-button',
@@ -10,7 +11,7 @@ import {CommunicationEventsService} from '../../services/communication-events.se
 export class JoinButtonComponent {
 
   @Input()
-  public eventId: number = 0;
+  public event!: MyEvent;
 
   public eventsJoined: number[] = [];
 
@@ -18,7 +19,7 @@ export class JoinButtonComponent {
   }
 
   sendEventId() {
-    this.communicationEventsService.emitEventId(this.eventId);
+    this.communicationEventsService.emitEventId(this.event.id);
   }
 
   ngOnInit() {
@@ -28,6 +29,12 @@ export class JoinButtonComponent {
   }
 
   isJoined() {
-    return this.eventsJoined.includes(this.eventId);
+    const today = new Date();
+    const eventDateTime = new Date(`${this.event.date}T${this.event.start_time}`)
+    if (eventDateTime < today) {
+      return true;
+    } else {
+      return this.eventsJoined.includes(this.event.id);
+    }
   }
 }

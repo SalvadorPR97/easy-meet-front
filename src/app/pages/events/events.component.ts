@@ -55,6 +55,7 @@ export class EventsComponent {
       this.joinEvent(id);
     });
     this.communicationEventsService.eventIdToDelete$.subscribe((id: number) => {
+      //TODO delete events
       console.log(id);
     })
     if (this.authService.isAuthenticated()) {

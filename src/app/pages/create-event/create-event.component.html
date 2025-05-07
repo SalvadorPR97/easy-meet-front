@@ -86,7 +86,7 @@
       <textarea class="form-control" formControlName="description" rows="3"></textarea>
     </div>
 
-    <button type="submit" class="btn myBtn mb-3 mb-lg-0" [disabled]="eventForm.invalid" data-bs-toggle="modal"
+    <button type="submit" class="btn myBtn mb-3 mb-lg-0" [disabled]="eventForm.invalid" [hidden]="sending" data-bs-toggle="modal"
             data-bs-target="#createEventModal">
       Crear Evento
     </button>
