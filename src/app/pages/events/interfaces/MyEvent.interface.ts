@@ -3,6 +3,8 @@ export interface MyEvent {
   title: string;
   description: string;
   location: string;
+  latitude: number;
+  longitude: number;
   city: string;
   image_url: string;
   date: string;

@@ -20,6 +20,7 @@ export class NominatimService {
       .set('q', query)
       .set('format', 'json')
       .set('addressdetails', '1')
+      .set('countrycodes', 'es')
       .set('limit', '5');
 
     const headers = new HttpHeaders({

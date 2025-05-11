@@ -41,6 +41,7 @@ export class EventsComponent {
   public serverImgUrl: string = environment.imgUrl;
   public selectedEventIdToDelete: number = 0;
   public deleting: boolean = false;
+  public eventLocation: { lat: number; lng: number } = { lat: 0, lng: 0 };
 
   constructor(public eventsService: EventsService, public communicationEventsService: CommunicationEventsService,
               public authService: AuthService, public router: Router) {
@@ -147,6 +148,7 @@ export class EventsComponent {
 
   chargeEvent(event: MyEvent) {
     this.imgUrl = this.serverImgUrl + event.image_url;
+    this.eventLocation = {lat: event.latitude, lng: event.longitude};
   }
 
   confirmDelete() {

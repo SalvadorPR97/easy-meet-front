@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import {EventsService} from '../events/services/events.service';
 import {Category} from '../events/interfaces/Category.interface';
 import {Subcategory} from '../events/interfaces/Subcategory.interface';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {dateNotInThePastValidator} from '../../core/validators/date.validator';
 import {Router} from '@angular/router';
 import {LocationMapComponent} from '../events/components/location-map/location-map.component';
 import {EventImgComponent} from '../events/components/event-img/event-img.component';
 import {CreateEventService} from './services/create-event.service';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {NominatimService} from '../events/services/nominatim.service';
 
 @Component({
   selector: 'pages-events-create-event',
@@ -29,13 +31,16 @@ export class CreateEventComponent {
   public sending: boolean = false;
   public eventForm: FormGroup;
   public selectedImage: File | null = null;
+  public suggestions: any[] = [];
+  public location = new FormControl('');
+  public locationCoordinates: { lat: number; lng: number } = { lat: 0, lng: 0 };
 
-  constructor(public eventsService: EventsService,public createEventService: CreateEventService, private readonly fb: FormBuilder, public router: Router) {
+  constructor(public eventsService: EventsService,public createEventService: CreateEventService, private readonly fb: FormBuilder, public router: Router,
+              private readonly nominatim: NominatimService) {
     this.eventForm = this.fb.group({
       category_id: ['', Validators.required],
       subcategory_id: ['', Validators.required],
       title: ['', Validators.required],
-      location: ['', Validators.required],
       image: [null],
       date: ['', [Validators.required, dateNotInThePastValidator()]],
       start_time: ['', Validators.required],
@@ -63,6 +68,14 @@ export class CreateEventComponent {
         this.router.navigate(['/eventos']);
       });
     }
+    this.location.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      // @ts-ignore
+      switchMap(value => this.nominatim.search(value))
+    ).subscribe(results => {
+      this.suggestions = results;
+    });
   }
 
   public getSubcategories(event: Event) {
@@ -79,7 +92,11 @@ export class CreateEventComponent {
     if (this.eventForm.valid) {
       this.sending = true;
       this.eventForm.addControl('city', this.fb.control(localStorage.getItem('city')));
+      this.eventForm.addControl('location', this.fb.control(this.location.value));
+      this.eventForm.addControl('latitude', this.fb.control(this.locationCoordinates.lat));
+      this.eventForm.addControl('longitude', this.fb.control(this.locationCoordinates.lng));
       const formData = this.buildFormData();
+      console.log(this.eventForm.value);
       this.createEventService.postEvent(formData).subscribe();
     } else {
       this.eventForm.markAllAsTouched();
@@ -119,6 +136,11 @@ export class CreateEventComponent {
       formData.append('image', this.selectedImage);
     }
     return formData;
+  }
+  selectSuggestion(suggestion: any): void {
+    this.location.setValue(suggestion.display_name, { emitEvent: false });
+    this.locationCoordinates = { lat: suggestion.lat, lng: suggestion.lon };
+    this.suggestions = [];
   }
 
   protected readonly HTMLSelectElement = HTMLSelectElement;

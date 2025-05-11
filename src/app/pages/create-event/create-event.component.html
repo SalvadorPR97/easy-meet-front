@@ -1,4 +1,4 @@
-<main class="container-fluid d-flex justify-content-between align-items-center gap-5 my-2 wheatBg">
+<main class="container-fluid d-flex justify-content-between gap-5 my-2 wheatBg">
   <form class="col-6 m-2" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
     <h3 class="text-center">Nuevo Evento</h3>
 
@@ -32,14 +32,23 @@
 
     <div class="mb-3">
       <label class="form-label" for="location">Dirección del Evento*</label>
-      <input type="text" class="form-control" formControlName="location">
+      <input type="text" [formControl]="location" class="form-control" placeholder="Introduce una dirección">
     </div>
+    @if (suggestions.length > 0) {
+      <ul class="list-group">
+        @for (suggestion of suggestions; track $index) {
+          <li class="list-group-item list-group-item-action"
+              (click)="selectSuggestion(suggestion)">
+            {{ suggestion.display_name }}
+          </li>
+        }
+      </ul>
+    }
 
     <div class="mb-3">
       <label class="form-label" for="event_image">Imagen</label>
       <input type="file" (change)="onImageSelected($event)" class="form-control" accept="image/*" formControlName="image">
     </div>
-    <!-- TODO añadir campo city  -->
     <div class="row d-flex align-items-center">
       <div class="mb-3 col-7">
         <label class="form-label" for="date">Fecha del Evento*</label>
@@ -121,6 +130,6 @@
 
   <div class="d-flex flex-column justify-content-center col-5 me-auto ms-5 gap-2 py-2">
     <pages-events-event-img [eventImg]="this.imgUrl"></pages-events-event-img>
-    <pages-events-location-map></pages-events-location-map>
+    <pages-events-location-map [location]="this.locationCoordinates" ></pages-events-location-map>
   </div>
 </main>
