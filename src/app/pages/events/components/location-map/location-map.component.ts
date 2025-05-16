@@ -21,6 +21,15 @@ export class LocationMapComponent {
     }
   }
 
+  private shadowlessIcon = L.icon({
+    iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowUrl: '', // Esto evita que se cargue la sombra
+    shadowSize: [0, 0],
+  });
+
   ngAfterViewInit(): void {
     const malagaCoords: [number, number] = [36.7213028, -4.4216366];
     this.map = L.map('map').setView(malagaCoords, 13);
@@ -29,7 +38,7 @@ export class LocationMapComponent {
       attribution: '© OpenStreetMap contributors'
     }).addTo(this.map);
 
-    this.marker = L.marker(malagaCoords).addTo(this.map);
+    this.marker = L.marker(malagaCoords, {icon: this.shadowlessIcon}).addTo(this.map);
   }
 
   showMap(lat: number, lon: number): void {
