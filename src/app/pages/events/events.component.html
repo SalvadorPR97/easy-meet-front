@@ -1,15 +1,38 @@
-<main class="container-fluid d-flex justify-content-between align-items-center gap-5 my-3 wheatBg">
+<main class="container-fluid d-flex justify-content-between align-items-center gap-5 my-2 wheatBg">
   <div class="d-flex flex-column col-6 align-self-start">
     <div class="d-flex justify-content-between align-items-center mt-4">
       <h3>Eventos</h3>
       <pages-events-button-create-event></pages-events-button-create-event>
     </div>
     <pages-events-event-filter [categories]="this.categories" [subcategories]="this.subcategories"
-                               (categoryIdEmitter)="getSubcategories($event)"></pages-events-event-filter>
-    <pages-events-events-list [events]="this.events" [loading]="this.loading"></pages-events-events-list>
+                               [cities]="this.cities" (cityNameEmitter)="addCityToFilter($event)"
+                               (categoryIdEmitter)="categoryReceived($event)"
+                               (subcategoryIdEmitter)="addSubcategoryToFilter($event)"></pages-events-event-filter>
+    <pages-events-events-list [events]="this.events" [loading]="this.loading"
+                              [categories]="this.categories" [subcategories]="this.allSubcategories"
+                              (eventImgUrlEmitter)="chargeEvent($event)"></pages-events-events-list>
   </div>
   <div class="d-flex flex-column justify-content-center col-5 me-auto ms-5 gap-2 py-2">
-    <pages-events-event-img></pages-events-event-img>
-    <pages-events-location-map></pages-events-location-map>
+    <pages-events-event-img [eventImg]="imgUrl"></pages-events-event-img>
+    <pages-events-location-map [location]="this.eventLocation"></pages-events-location-map>
   </div>
 </main>
+
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteLabel">Confirmar eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que quieres eliminar este evento?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="this.confirmDelete()" [disabled]="deleting">Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

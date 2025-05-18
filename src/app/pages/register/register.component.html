@@ -26,48 +26,50 @@
       <input type="password" class="form-control" id="password_confirm" formControlName="password_confirm" required>
     </div>
     <div class="mb-3">
-      <label for="profile_pic" class="form-label">Foto de Perfil</label>
-      <input type="file" class="form-control" id="profile_pic" formControlName="profile_pic" accept="image/*">
+      <label for="province" class="form-label">Provincia*</label>
+      <select class="form-select selectpicker" id="province" formControlName="city" data-live-search="true">
+        <option value="" disabled selected>Seleccione Provincia…</option>
+        @for (province of provinces; track province.name) {
+          <option> {{ province.name }}</option>
+        }
+      </select>
     </div>
     <div class="mb-3">
-      <label for="dni" class="form-label">DNI <span class="text-black-50">Si es correcto podrás obtener la insignia de
-        verificado</span></label>
-      <input type="text" class="form-control" id="dni" formControlName="dni" pattern="^[0-9]{8}[A-Za-z]$"
-             title="Debe tener 8 números seguidos de 1 letra (ejemplo: 12345678A).">
-      <div class="invalid-feedback">
-        El DNI debe tener 8 números seguidos de 1 letra (ejemplo: 12345678A).
-      </div>
+      <label for="profile_pic" class="form-label">Foto de Perfil</label>
+      <input type="file" class="form-control" (change)="onFileSelected($event)" id="profile_pic" accept="image/*">
     </div>
     <div class="mb-3 col">
       <label for="birthdate" class="form-label">Fecha de Nacimiento*</label>
       <input type="date" class="form-control" id="birthdate" formControlName="birthdate" [max]="maxDate" required>
     </div>
-    <button type="submit" data-bs-toggle="modal" data-bs-target="#createUserModal"
-            [disabled]="this.registerForm.invalid" class="btn btnForm mb-3 mb-lg-0">
-      Registrarse
-    </button>
+
     @if (sending) {
       <span class="d-inline-block mb-3 mb-lg-0" data-bs-toggle="tooltip">
-        <button class="btn btnForm" type="button" disabled>
+        <button class="btn myBtn" type="button" disabled>
             <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
             Creando...
         </button>
       </span>
+    } @else {
+      <button type="submit" data-bs-toggle="modal" data-bs-target="#createUserModal"
+              [disabled]="this.registerForm.invalid" class="btn myBtn mb-3 mb-lg-0">
+        Registrarse
+      </button>
     }
   </form>
   <div class="col-3">
     <img src="assets/img/placeholder_profile_pic.png" class="rounded-circle w-50 mt-5"
-         alt="Imagen ubicación en google maps">
+         alt="Avatar de usuario">
   </div>
   <div class="modal fade" id="createUserModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Evento creado</h5>
+          <h5 class="modal-title">Usuario creado</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Evento creado correctamente, espera a que se unan otros participantes.
+          Usuario creado correctamente. DIsfrute de la aplicación!
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>

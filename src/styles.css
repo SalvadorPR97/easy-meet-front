@@ -35,7 +35,7 @@ app-root {
   background-color: var(--wheat);
 }
 
-.btnForm{
+.myBtn{
   background-color: var(--moss-green) !important;
   color: white !important;
 }

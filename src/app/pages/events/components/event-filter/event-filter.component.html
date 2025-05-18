@@ -1,8 +1,9 @@
 <div class="row pt-4 sticky-top formEvento">
-  <div class="col-6">
+  <div class="col-3">
     <span><i class="bi bi-funnel-fill"></i> Filtros:</span>
     <span id="eventSearcherFilter"></span>
   </div>
+  <pages-events-cities-select class="col-3" [cities]="this.cities" (citySelectedEmitter)="emitCityName($event)"></pages-events-cities-select>
   <pages-events-category-select class="col-3" [categories]="this.categories" (categorySelectedEmitter)="emitCategoryId($event)"></pages-events-category-select>
-  <pages-events-subcategory-select class="col-3" [subcategories]="this.subcategories"></pages-events-subcategory-select>
+  <pages-events-subcategory-select class="col-3" [subcategories]="this.subcategories" (subcategorySelectedEmitter)="emitSubcategoryId($event)"></pages-events-subcategory-select>
 </div>

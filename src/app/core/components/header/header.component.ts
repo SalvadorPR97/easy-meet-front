@@ -17,6 +17,7 @@ export class HeaderComponent {
   onLogout() {
     this.authService.logout();
     this.authService.deleteToken();
+    this.authService.deleteUserInfo();
     window.location.reload();
   }
 }

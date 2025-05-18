@@ -1,4 +1,4 @@
-<div class="pe-2 overflow-y-auto" id="eventsList">
+<div class="pe-2 overflow-y-auto mb-3" id="eventsList">
   @if (loading) {
     @for (skeleton of skeletons; track $index) {
       <div class="card mb-2">
@@ -34,7 +34,8 @@
     }
   } @else {
     @for (event of events; track event.id) {
-      <pages-events-event-card [event]="event"></pages-events-event-card>
+      <pages-events-event-card [event]="event" [categories]="this.categories" [subcategories]="this.subcategories"
+                               (eventImgUrlEmitter)="this.emitEventImgUrl($event)"></pages-events-event-card>
     }
   }
 

@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Category} from '../interfaces/Category.interface';
 import {Subcategory} from '../interfaces/Subcategory.interface';
-import {MyEvent} from '../interfaces/MyEvent.interface';
 import {environment} from '../../../../environments/environment';
+import {City} from '../interfaces/City.interface';
+import {EventsFilters} from '../interfaces/EventsFilters.interface';
+import {MyEventRes} from '../interfaces/MyEventRes.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +26,37 @@ export class EventsService {
     return this.http.get<Subcategory[]>(`${this.apiUrl}subcategories/${id}`);
   }
 
-  public getEventsByCity(city: string): Observable<{ events: MyEvent[] }> {
-    return this.http.get<{ events: MyEvent[] }>(`${this.apiUrl}events/${city}`);
+  public getAllSubcategories(): Observable<Subcategory[]> {
+    return this.http.get<Subcategory[]>(`${this.apiUrl}subcategories/`);
+  }
+
+  public getEventsByCity(city: string): Observable<MyEventRes> {
+    return this.http.get<MyEventRes>(`${this.apiUrl}events/city/${city}`);
+  }
+  public joinEvent(id: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}eventsUsers/join/${id}`, {});
+  }
+  public getJoinedEvents(): Observable<any> {
+    return this.http.get(`${this.apiUrl}eventsUsers/joined`);
+  }
+  public getCities(): Observable<{ cities: City[] }> {
+    return this.http.get<{ cities: City[]}>(`${this.apiUrl}events/cities`);
+  }
+  public filterEvents(filters: EventsFilters): Observable<MyEventRes> {
+    let params = new HttpParams();
+
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== null && value !== undefined && value !== '') {
+        params = params.set(key, value.toString());
+      }
+    });
+
+    return this.http.get<MyEventRes>(`${this.apiUrl}events/filter`, { params });
+  }
+  public getEventsByUser(): Observable<MyEventRes> {
+    return this.http.get<MyEventRes>(`${this.apiUrl}events/userEvents`);
+  }
+  public deleteEvent(id: number): Observable<{message: string}> {
+    return this.http.delete<{message: string}>(`${this.apiUrl}events/delete/${id}`);
   }
 }

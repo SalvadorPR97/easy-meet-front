@@ -1,33 +1,34 @@
-
-
-
-<div class="card mb-2">
+<div class="card mb-2" (click)="emitEvent()">
   <div class="row g-0 gap-4 d-flex align-items-center">
     <div class="col-4">
-      <img src="assets/img/selfieCine.jpg" class="img-fluid rounded-2 m-2" alt="picture of an event">
+      <img src="{{ this.imgUrl }}{{this.event.image_url}}" class="img-fluid rounded-2 m-2"
+           alt="picture of an event">
     </div>
     <div class="col-7">
       <div class="card-body">
-        <h5 class="card-title">{{this.event.title}}</h5>
-        <p class="card-text">Descripción: {{this.event.description}}</p>
+        <h5 class="card-title">{{ this.event.title }}</h5>
+        <p class="card-text">Descripción: {{ this.event.description }}</p>
         <div class="row">
           <div class="col-4">
-            <p class="card-text">Categoría: {{this.event.category_id}}<span id="date"></span></p>
-            <p class="card-text">Subcategoría: {{this.event.subcategory_id}}<span id="time"></span></p>
-            <p class="card-text">Dirección: {{this.event.location}}<span id="time"></span></p>
+            <p class="card-text">Categoría: {{ this.categories.at(this.event.category_id -1)?.name }}</p>
+            <p class="card-text">Subcategoría: {{ this.subcategories.at(this.event.subcategory_id -1)?.name }}</p>
+            <p class="card-text">Dirección: {{ this.event.location }}</p>
           </div>
           <div class="col-4">
-            <p class="card-text">Fecha: {{this.event.date}}<span id="price"></span></p>
-            <p class="card-text">Hora Inicio: {{this.event.start_time}}<span id="price"></span></p>
-            <p class="card-text">Hora Fin: {{this.event.end_time}}<span id="seats"></span></p>
+            <p class="card-text">Fecha: {{ this.event.date }}</p>
+            <p class="card-text">Hora Inicio: {{ this.event.start_time.slice(0, 5) }}</p>
+            <p class="card-text">Hora Fin: {{ this.event.end_time.slice(0, 5) }}</p>
           </div>
           <div class="col-4">
-            <p class="card-text">Mín Personas: {{this.event.min_participants}}<span id="date"></span></p>
-            <p class="card-text">Máx Personas: {{this.event.max_participants}}<span id="date"></span></p>
-            <p class="card-text">Precio: {{this.event.price}}<span id="time"></span></p>
+            <p class="card-text">Mín Personas: {{ this.event.min_participants }}</p>
+            <p class="card-text">Máx Personas: {{ this.event.max_participants }}</p>
+            <p class="card-text">Precio: {{ this.event.price }}€</p>
+            <pages-events-join-button [event]="this.event" class="me-1"></pages-events-join-button>
+            <pages-events-delete-button [event]="this.event" class="me-1"></pages-events-delete-button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
