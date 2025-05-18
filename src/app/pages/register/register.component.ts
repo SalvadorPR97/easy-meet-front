@@ -15,6 +15,7 @@ export class RegisterComponent {
   public maxDate: string = "";
   public sending: boolean = false;
   public registerForm: FormGroup;
+  public provinces: { name: string}[] = [];
 
   constructor(private readonly fb: FormBuilder, public router: Router, private readonly registerService: RegisterService) {
     this.registerForm = this.fb.group({
@@ -24,8 +25,7 @@ export class RegisterComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       password_confirm: ['', [Validators.required, Validators.minLength(8)]],
-      profile_pic: [null],
-      dni: [''],
+      city: ['', Validators.required],
       birthdate: [null, [Validators.required]],
     });
   }
@@ -40,11 +40,17 @@ export class RegisterComponent {
         this.router.navigate(['']);
       });
     }
+    this.registerService.getProvinces().subscribe(
+      (res) => {
+        this.provinces = res;
+      }
+    )
   }
 
   onSubmit() {
     if (this.registerForm.valid) {
       this.sending = true;
+
       this.registerService.registerUser(this.registerForm.value).subscribe();
     } else {
       this.registerForm.markAllAsTouched();

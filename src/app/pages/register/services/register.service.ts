@@ -16,4 +16,7 @@ export class RegisterService {
   public registerUser(newUser: any): Observable<any> {
     return this.http.post(`${this.apiUrl}register`, newUser);
   }
+  public getProvinces(): Observable<{name: string}[]> {
+    return this.http.get<{ name: string }[]>('/assets/data/provinces.json');
+  }
 }
