@@ -13,10 +13,11 @@ export class RegisterService {
 
   private readonly apiUrl = environment.apiUrl;
 
-  public registerUser(newUser: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}register`, newUser);
+  public registerUser(data: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}register`, data);
   }
-  public getProvinces(): Observable<{name: string}[]> {
+
+  public getProvinces(): Observable<{ name: string }[]> {
     return this.http.get<{ name: string }[]>('/assets/data/provinces.json');
   }
 }
