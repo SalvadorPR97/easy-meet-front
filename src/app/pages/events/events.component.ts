@@ -85,7 +85,7 @@ export class EventsComponent {
         }
       );
     } else {
-      this.getEventsByCity("Marbella");
+      this.getEventsByCity("Málaga");
     }
   }
 

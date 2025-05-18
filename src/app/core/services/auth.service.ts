@@ -36,6 +36,11 @@ export class AuthService {
     localStorage.setItem('userId', user.id);
   }
 
+  deleteUserInfo(): void {
+    localStorage.removeItem('city');
+    localStorage.removeItem('userId');
+  }
+
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
