@@ -34,7 +34,8 @@
     }
   } @else {
     @for (event of events; track event.id) {
-      <pages-events-event-card [event]="event" (eventImgUrlEmitter)="this.emitEventImgUrl($event)"></pages-events-event-card>
+      <pages-events-event-card [event]="event" [categories]="this.categories" [subcategories]="this.subcategories"
+                               (eventImgUrlEmitter)="this.emitEventImgUrl($event)"></pages-events-event-card>
     }
   }
 

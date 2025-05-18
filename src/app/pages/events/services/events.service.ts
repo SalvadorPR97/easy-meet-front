@@ -26,6 +26,10 @@ export class EventsService {
     return this.http.get<Subcategory[]>(`${this.apiUrl}subcategories/${id}`);
   }
 
+  public getAllSubcategories(): Observable<Subcategory[]> {
+    return this.http.get<Subcategory[]>(`${this.apiUrl}subcategories/`);
+  }
+
   public getEventsByCity(city: string): Observable<MyEventRes> {
     return this.http.get<MyEventRes>(`${this.apiUrl}events/city/${city}`);
   }

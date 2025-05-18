@@ -32,6 +32,7 @@ declare const bootstrap: any;
 export class EventsComponent {
   public categories: Category[] = [];
   public subcategories: Subcategory[] = [];
+  public allSubcategories: Subcategory[] = [];
   public cities: City[] = [];
   public events: MyEvent[] = [];
   public joinedEventsIds: number[] = [];
@@ -56,6 +57,11 @@ export class EventsComponent {
     this.eventsService.getCategories().subscribe(
       (res) => {
         this.categories = res;
+      }
+    );
+    this.eventsService.getAllSubcategories().subscribe(
+      (res) => {
+        this.allSubcategories = res;
       }
     );
     this.communicationEventsService.eventId$.subscribe((id: number) => {

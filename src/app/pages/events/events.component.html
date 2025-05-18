@@ -8,7 +8,9 @@
                                [cities]="this.cities" (cityNameEmitter)="addCityToFilter($event)"
                                (categoryIdEmitter)="categoryReceived($event)"
                                (subcategoryIdEmitter)="addSubcategoryToFilter($event)"></pages-events-event-filter>
-    <pages-events-events-list [events]="this.events" [loading]="this.loading" (eventImgUrlEmitter)="chargeEvent($event)"></pages-events-events-list>
+    <pages-events-events-list [events]="this.events" [loading]="this.loading"
+                              [categories]="this.categories" [subcategories]="this.allSubcategories"
+                              (eventImgUrlEmitter)="chargeEvent($event)"></pages-events-events-list>
   </div>
   <div class="d-flex flex-column justify-content-center col-5 me-auto ms-5 gap-2 py-2">
     <pages-events-event-img [eventImg]="imgUrl"></pages-events-event-img>
@@ -28,7 +30,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-danger" (click)="this.confirmDelete()" [disabled]="deleting">Eliminar</button>
+        <button type="button" class="btn btn-danger" (click)="this.confirmDelete()" [disabled]="deleting">Eliminar
+        </button>
       </div>
     </div>
   </div>
