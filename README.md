@@ -1,59 +1,58 @@
-# Client
+# Easy Meet - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.3.
+Este es el frontend de la aplicación **Easy Meet**, desarrollado con **Angular** y **Bootstrap**. Proporciona una interfaz web moderna y responsiva para gestionar reuniones de manera eficiente.
 
-## Development server
+## 🛠 Tecnologías utilizadas
 
-To start a local development server, run:
+- **Angular**
+- **Bootstrap 5**
+- **TypeScript**
+- **Jest**
+
+## ⚙️ Requisitos previos
+
+- Node.js v18 o superior
+- Angular CLI (`npm install -g @angular/cli`)
+- npm
+
+## 🚀 Instalación
+
+Clona el repositorio e instala las dependencias:
 
 ```bash
+git clone https://github.com/SalvadorPR97/easy-meet-front.git
+cd easy-meet-frontend
+npm install
+```
+
+## 📦 Scripts disponibles  
+
+### Iniciar la aplicación
+```
 ng serve
 ```
+La aplicación se ejecutará en http://localhost:4200
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+### Ejecutar pruebas unitarias
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+npm run test
 ```
+Asegúrate de tener configurado jest.config.js y que los tests estén escritos con Jest.
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
+### Construir la aplicación para producción
 ```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+ng build --configuration=production
 ```
+Los archivos se generarán en el directorio dist/.
 
-## Running end-to-end tests
+## ✅ Buenas prácticas
 
-For end-to-end (e2e) testing, run:
+- Arquitectura modular
+- Separación de lógica en servicios
+- Tipado estricto con TypeScript
+- Pruebas unitarias con Jest
+- Estilos globales centralizados
+- Responsive design con Bootstrap
 
-```bash
-ng e2e
-```
+## 📌 Pendientes / Mejoras futuras
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

@@ -40,9 +40,13 @@ export class EventCardComponent {
   adaptLocation() {
     let splitted = this.event.location.split(',');
     if (isNaN(Number(splitted[0]))) {
-      this.event.location = splitted[1] + ' S/N';
+      if (isNaN(Number(splitted[1]))) {
+        this.event.location = splitted[0] + ' S/N'
+      } else {
+        this.event.location = splitted[0] + ' Nº ' + splitted[1];
+      }
     } else {
-      this.event.location = splitted[1] + ', ' + splitted[0];
+      this.event.location = splitted[1] + ' Nº ' + splitted[0];
     }
   }
 

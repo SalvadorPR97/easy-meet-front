@@ -6,12 +6,20 @@
 
 .carousel-inner img {
   object-fit: cover;
+  object-position: 70% 40%;
   width: 100%;
   height: 400px;
+}
+.carousel-inner img:nth-child(2) {
+  object-position: bottom;
 }
 
 .carousel-subtitle{
   font-weight: bold;
   background-color: var(--wheat-over);
   color: var(--chestnut);
+}
+
+.card {
+  width: 35rem;
 }
