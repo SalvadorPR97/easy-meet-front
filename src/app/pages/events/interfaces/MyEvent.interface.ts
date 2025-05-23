@@ -8,8 +8,8 @@ export interface MyEvent {
   city: string;
   image_url: string;
   date: string;
-  start_time: number;
-  end_time: number;
+  start_time: string;
+  end_time: string;
   only_women: boolean;
   only_men: boolean;
   category_id: number;

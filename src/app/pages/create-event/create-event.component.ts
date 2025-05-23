@@ -96,7 +96,6 @@ export class CreateEventComponent {
       this.eventForm.addControl('latitude', this.fb.control(this.locationCoordinates.lat));
       this.eventForm.addControl('longitude', this.fb.control(this.locationCoordinates.lng));
       const formData = this.buildFormData();
-      console.log(this.eventForm.value);
       this.createEventService.postEvent(formData).subscribe();
     } else {
       this.eventForm.markAllAsTouched();

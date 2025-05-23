@@ -32,6 +32,7 @@ declare const bootstrap: any;
 export class EventsComponent {
   public categories: Category[] = [];
   public subcategories: Subcategory[] = [];
+  public allSubcategories: Subcategory[] = [];
   public cities: City[] = [];
   public events: MyEvent[] = [];
   public joinedEventsIds: number[] = [];
@@ -58,6 +59,11 @@ export class EventsComponent {
         this.categories = res;
       }
     );
+    this.eventsService.getAllSubcategories().subscribe(
+      (res) => {
+        this.allSubcategories = res;
+      }
+    );
     this.communicationEventsService.eventId$.subscribe((id: number) => {
       this.joinEvent(id);
     });
@@ -79,7 +85,7 @@ export class EventsComponent {
         }
       );
     } else {
-      this.getEventsByCity("Marbella");
+      this.getEventsByCity("Málaga");
     }
   }
 
