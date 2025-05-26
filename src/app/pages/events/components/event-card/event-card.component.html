@@ -10,12 +10,12 @@
         <p class="card-text">Descripción: {{ this.event.description }}</p>
         <div class="row">
           <div class="col-4">
-            <p class="card-text">Categoría: {{ this.categories.at(this.event.category_id -1)?.name }}</p>
-            <p class="card-text">Subcategoría: {{ this.subcategories.at(this.event.subcategory_id -1)?.name }}</p>
-            <p class="card-text">Dirección: {{ this.event.location }}</p>
+            <p class="card-text">Categoría: {{ this.categories.at(this.event.category_id - 1)?.name }}</p>
+            <p class="card-text">Subcategoría: {{ this.subcategories.at(this.event.subcategory_id - 1)?.name }}</p>
+            <p class="card-text">Dirección: {{ this.resumedLocation }}</p>
           </div>
           <div class="col-4">
-            <p class="card-text">Fecha: {{ this.event.date }}</p>
+            <p class="card-text">Fecha: {{ this.esFormatDate }}</p>
             <p class="card-text">Hora Inicio: {{ this.event.start_time.slice(0, 5) }}</p>
             <p class="card-text">Hora Fin: {{ this.event.end_time.slice(0, 5) }}</p>
           </div>

@@ -25,7 +25,8 @@ export class EventCardComponent {
   public subcategories: Subcategory[] = [];
   @Output()
   public eventImgUrlEmitter: EventEmitter<MyEvent> = new EventEmitter<MyEvent>();
-
+  public resumedLocation: string = '';
+  public esFormatDate: string = "";
   public imgUrl = environment.imgUrl;
 
   emitEvent(): void {
@@ -34,19 +35,19 @@ export class EventCardComponent {
 
   ngOnInit() {
     this.adaptLocation();
-    this.event.date = new Intl.DateTimeFormat('es-ES').format(new Date(this.event.date))
+    this.esFormatDate = new Intl.DateTimeFormat('es-ES').format(new Date(this.event.date))
   }
 
   adaptLocation() {
     let splitted = this.event.location.split(',');
     if (isNaN(Number(splitted[0]))) {
       if (isNaN(Number(splitted[1]))) {
-        this.event.location = splitted[0] + ' S/N'
+        this.resumedLocation = splitted[0].trim() + ', S/N'
       } else {
-        this.event.location = splitted[0] + ' Nº ' + splitted[1];
+        this.resumedLocation = splitted[0].trim() + ', Nº ' + splitted[1].trim();
       }
     } else {
-      this.event.location = splitted[1] + ' Nº ' + splitted[0];
+      this.resumedLocation = splitted[1].trim() + ', Nº ' + splitted[0].trim();
     }
   }
 

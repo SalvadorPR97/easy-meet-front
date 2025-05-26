@@ -8,7 +8,7 @@
                                [cities]="this.cities" (cityNameEmitter)="addCityToFilter($event)"
                                (categoryIdEmitter)="categoryReceived($event)"
                                (subcategoryIdEmitter)="addSubcategoryToFilter($event)"></pages-events-event-filter>
-    <div class="accordion" id="myEventsAccordion">
+    <div class="accordion mb-2" id="myEventsAccordion">
       <div class="accordion-item">
         <h2 class="accordion-header">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#actualEvents"
@@ -18,7 +18,8 @@
         </h2>
         <div id="actualEvents" class="accordion-collapse collapse show" data-bs-parent="#myEventsAccordion">
           <div class="accordion-body">
-            <pages-events-events-list [events]="this.events" [loading]="this.loading"
+            <pages-events-events-list [events]="this.events" [loading]="this.loading" [categories]="this.categories"
+                                      [subcategories]="this.allSubcategories" [paginationId]="'actualEvents'"
                                       (eventImgUrlEmitter)="chargeEventImg($event)"></pages-events-events-list>
           </div>
         </div>
@@ -32,7 +33,8 @@
         </h2>
         <div id="pastEvents" class="accordion-collapse collapse" data-bs-parent="#myEventsAccordion">
           <div class="accordion-body">
-            <pages-events-events-list [events]="this.oldEvents" [loading]="this.loading"
+            <pages-events-events-list [events]="this.oldEvents" [loading]="this.loading" [categories]="this.categories"
+                                      [subcategories]="this.allSubcategories" [paginationId]="'pastEvents'"
                                       (eventImgUrlEmitter)="chargeEventImg($event)"></pages-events-events-list>
           </div>
         </div>

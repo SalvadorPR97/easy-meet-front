@@ -33,10 +33,18 @@
       </div>
     }
   } @else {
-    @for (event of events; track event.id) {
-      <pages-events-event-card [event]="event" [categories]="this.categories" [subcategories]="this.subcategories"
-                               (eventImgUrlEmitter)="this.emitEventImgUrl($event)"></pages-events-event-card>
+    @for (event of (events | paginate: {
+      itemsPerPage: itemsPerPage,
+      currentPage: page,
+      id: paginationId
+    }); track event.id) {
+      <pages-events-event-card [event]="event" [categories]="categories" [subcategories]="subcategories"
+                               (eventImgUrlEmitter)="emitEventImgUrl($event)"></pages-events-event-card>
     }
-  }
 
+  }
+</div>
+<div id="pagination_controls">
+  <pagination-controls (pageChange)="page = $event" [maxSize]="10" [id]="this.paginationId" previousLabel="Anterior"
+                       nextLabel="Siguiente"></pagination-controls>
 </div>

@@ -1,4 +1,4 @@
-#eventsList{
+#eventsList {
   max-height: 70vh;
   min-height: 30vh;
 }
@@ -32,4 +32,8 @@
   100% {
     background-position: -200% 0;
   }
+}
+
+#pagination_controls {
+  text-align: center;
 }
