@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {ButtonCreateEventComponent} from '../events/components/button-create-event/button-create-event.component';
 import {EventFilterComponent} from '../events/components/event-filter/event-filter.component';
 import {EventImgComponent} from '../events/components/event-img/event-img.component';
@@ -12,7 +12,7 @@ import {EventsFilters} from '../events/interfaces/EventsFilters.interface';
 import {EventsService} from '../events/services/events.service';
 import {CommunicationEventsService} from '../events/services/communication-events.service';
 import {Router} from '@angular/router';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 declare const bootstrap: any;
 
@@ -38,7 +38,7 @@ export class MyEventsComponent {
   public joinedEventsIds: number[] = [];
   public loading = true;
   public filters: EventsFilters = {};
-  public imgUrl: string | ArrayBuffer | null = "assets/img/fotoGrupoParque.jpg";
+  public imgUrl: string | ArrayBuffer | null  = "assets/img/fotoGrupoParque.jpg";
   public serverImgUrl: string = environment.imgUrl;
   public selectedEventIdToDelete: number = 0;
   public deleting: boolean = false;
@@ -104,35 +104,32 @@ export class MyEventsComponent {
 
   categoryReceived(category_id: number) {
     this.getSubcategories(category_id);
-    this.addCategoryToFilter(category_id);
+    //this.addCategoryToFilter(category_id);
   }
 
   addCityToFilter(city: string) {
-    this.filters.city = city;
-    this.filterEvents();
+    /*this.filters.city = city;
+    this.filterEvents();*/
   }
-
   addCategoryToFilter(category_id: number) {
-    this.filters.category_id = category_id;
-    this.filterEvents();
+    /*this.filters.category_id = category_id;
+    this.filterEvents();*/
   }
-
   addSubcategoryToFilter(subcategory_id: number) {
-    this.filters.subcategory_id = subcategory_id;
-    this.filterEvents();
+    /*this.filters.subcategory_id = subcategory_id;
+    this.filterEvents();*/
   }
 
   filterEvents() {
-    this.events = [];
+    /*this.events = [];
     this.loading = true;
     this.eventsService.filterEvents(this.filters).subscribe(
       (res) => {
         this.events = res.events;
         this.loading = false;
       }
-    )
+    )*/
   }
-
   chargeEventImg(event: MyEvent) {
     this.imgUrl = this.serverImgUrl + event.image_url;
   }
