@@ -14,6 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router'; // <-- Import ActivatedR
 import {City} from './interfaces/City.interface';
 import {EventsFilters} from './interfaces/EventsFilters.interface';
 import {environment} from '../../../environments/environment';
+import {AngularToastifyModule, ToastService} from 'angular-toastify';
 
 declare const bootstrap: any;
 
@@ -25,6 +26,7 @@ declare const bootstrap: any;
     EventFilterComponent,
     EventsListComponent,
     ButtonCreateEventComponent,
+    AngularToastifyModule,
   ],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
@@ -49,7 +51,8 @@ export class EventsComponent {
     public communicationEventsService: CommunicationEventsService,
     public authService: AuthService,
     public router: Router,
-    private readonly route: ActivatedRoute // <-- Inject ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly toastService: ToastService,
   ) {
   }
 
@@ -67,11 +70,15 @@ export class EventsComponent {
       this.joinEvent(id);
     });
     this.communicationEventsService.eventIdToLeave$.subscribe((id: number) => {
-      this.eventsService.leaveEvent(id).subscribe(
-        () => {
+      this.eventsService.leaveEvent(id).subscribe({
+        next: () => {
+          this.toastService.success('Has dejado el evento');
           window.location.reload();
+        },
+        error: (err) => {
+          this.toastService.error(err.error.message);
         }
-      );
+      });
     });
     this.communicationEventsService.eventIdToDelete$.subscribe((id: number) => {
       this.selectedEventIdToDelete = id;
