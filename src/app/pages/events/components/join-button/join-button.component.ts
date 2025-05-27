@@ -18,8 +18,12 @@ export class JoinButtonComponent {
   constructor(public communicationEventsService: CommunicationEventsService) {
   }
 
-  sendEventId() {
-    this.communicationEventsService.emitEventId(this.event.id);
+  sendEventIdToJoin() {
+    this.communicationEventsService.emitEventIdToJoin(this.event.id);
+  }
+
+  sendEventIdToLeave() {
+    this.communicationEventsService.emitEventIdToLeave(this.event.id);
   }
 
   ngOnInit() {
@@ -38,8 +42,16 @@ export class JoinButtonComponent {
     }
   }
 
-  canJoin() {
-    console.log(this.event.owner_id != Number(localStorage.getItem('userId')));
+  isOwner() {
     return this.event.owner_id == Number(localStorage.getItem('userId'));
+  }
+
+  canNotJoin() {
+    return this.isJoined() || this.isOwner();
+  }
+  canNotLeave() {
+    if (this.isOwner()) {
+      return true;
+    } else return !this.isJoined();
   }
 }

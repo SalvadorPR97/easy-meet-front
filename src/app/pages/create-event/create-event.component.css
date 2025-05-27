@@ -1,7 +1,7 @@
 label{
   font-weight: bold;
 }
-.myBtn{
+.myBtnSuccess{
   background-color: var(--moss-green) !important;
   color: white !important;
 }

@@ -36,11 +36,14 @@ export class EventsService {
   public joinEvent(id: number): Observable<any> {
     return this.http.post(`${this.apiUrl}eventsUsers/join/${id}`, {});
   }
+  public leaveEvent(id: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}eventsUsers/leave/${id}`, {});
+  }
   public getJoinedEvents(): Observable<any> {
     return this.http.get(`${this.apiUrl}eventsUsers/joined`);
   }
   public getCities(): Observable<{ cities: City[] }> {
-    return this.http.get<{ cities: City[]}>(`${this.apiUrl}events/cities`);
+    return this.http.get<{ cities: City[]}>(`${this.apiUrl}events/citiesAll`);
   }
   public getCitiesByOwner(owner_id: string | null): Observable<{ cities: City[] }> {
     return this.http.get<{ cities: City[]}>(`${this.apiUrl}events/cities/${owner_id}`);

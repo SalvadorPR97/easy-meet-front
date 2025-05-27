@@ -13,12 +13,12 @@ describe('CommunicationEventsService', () => {
 
   it('should emit event ID on eventId$', (done) => {
     const testId = 42;
-    service.eventId$.subscribe(id => {
+    service.eventIdToJoin$.subscribe(id => {
       expect(id).toBe(testId);
       done();
     });
 
-    service.emitEventId(testId);
+    service.emitEventIdToJoin(testId);
   });
 
   it('should emit event ID to delete on eventIdToDelete$', (done) => {

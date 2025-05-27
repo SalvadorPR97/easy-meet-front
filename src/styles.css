@@ -6,6 +6,7 @@
   --gold: #DA983C;
   --dark-fern: #495235;
   --wheat-over: #F4DDB880;
+  --soft-red: #C05C5C;
 }
 
 html, body {
@@ -35,7 +36,12 @@ app-root {
   background-color: var(--wheat);
 }
 
-.myBtn{
+.myBtnSuccess{
   background-color: var(--moss-green) !important;
+  color: white !important;
+}
+
+.myBtnLightDanger{
+  background-color: var(--soft-red) !important;
   color: white !important;
 }

@@ -6,14 +6,20 @@ import {BehaviorSubject, Subject} from 'rxjs';
 })
 export class CommunicationEventsService {
 
-  private readonly eventIdSource = new Subject<number>();
-  eventId$ = this.eventIdSource.asObservable();
+  private readonly eventIdSourceToJoin = new Subject<number>();
+  eventIdToJoin$ = this.eventIdSourceToJoin.asObservable();
+
+  private readonly eventIdSourceToLeave = new Subject<number>();
+  eventIdToLeave$ = this.eventIdSourceToLeave.asObservable();
 
   private readonly eventIdSourceToDelete = new Subject<number>();
   eventIdToDelete$ = this.eventIdSourceToDelete.asObservable();
 
-  emitEventId(id: number) {
-    this.eventIdSource.next(id);
+  emitEventIdToJoin(id: number) {
+    this.eventIdSourceToJoin.next(id);
+  }
+  emitEventIdToLeave(id: number) {
+    this.eventIdSourceToLeave.next(id);
   }
 
   emitEventIdToDelete(id: number) {

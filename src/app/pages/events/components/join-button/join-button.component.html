@@ -1,1 +1,2 @@
-<button type="submit" class="btn myBtn px-2" (click)="sendEventId()" [disabled]="this.isJoined()" [hidden]="canJoin()">Unirse</button>
+<button type="submit" class="btn myBtnSuccess px-2" (click)="sendEventIdToJoin()" [hidden]="this.canNotJoin()">Unirse</button>
+<button type="submit" class="btn myBtnLightDanger px-2" (click)="sendEventIdToLeave()" [hidden]="this.canNotLeave()">Abandonar</button>

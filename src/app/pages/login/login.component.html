@@ -11,12 +11,12 @@
     </div>
     @if (sending) {
       <span class="d-inline-block mb-3 mb-lg-0" data-bs-toggle="tooltip">
-          <button class="btn myBtn" type="button" disabled>
+          <button class="btn myBtnSuccess" type="button" disabled>
           <span class="spinner-border spinner-border-sm" aria-hidden="true"></span> Cargando...
           </button>
     </span>
     } @else {
-      <button type="submit" [disabled]="!loginForm.valid" class="btn myBtn mb-3 mb-lg-0">Iniciar Sesión</button>
+      <button type="submit" [disabled]="!loginForm.valid" class="btn myBtnSuccess mb-3 mb-lg-0">Iniciar Sesión</button>
     }
     <div class="d-flex justify-content-between">
       <a href="/registro" class="col-6">No tienes cuenta? Regístrate aquí</a>
