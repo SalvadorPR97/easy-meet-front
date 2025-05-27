@@ -37,4 +37,9 @@ export class JoinButtonComponent {
       return this.eventsJoined.includes(this.event.id);
     }
   }
+
+  canJoin() {
+    console.log(this.event.owner_id != Number(localStorage.getItem('userId')));
+    return this.event.owner_id == Number(localStorage.getItem('userId'));
+  }
 }

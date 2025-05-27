@@ -11,7 +11,7 @@ import {MyEvent} from '../events/interfaces/MyEvent.interface';
 import {EventsFilters} from '../events/interfaces/EventsFilters.interface';
 import {EventsService} from '../events/services/events.service';
 import {CommunicationEventsService} from '../events/services/communication-events.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { environment } from '../../../environments/environment';
 
 declare const bootstrap: any;
@@ -44,11 +44,11 @@ export class MyEventsComponent {
   public deleting: boolean = false;
 
   constructor(public eventsService: EventsService, public communicationEventsService: CommunicationEventsService,
-              public router: Router) {
+              public router: Router, public route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.eventsService.getCities().subscribe(
+    this.eventsService.getCitiesByOwner(localStorage.getItem("userId")).subscribe(
       (res) => {
         this.cities = res.cities;
       }
@@ -63,28 +63,25 @@ export class MyEventsComponent {
         this.allSubcategories = res;
       }
     );
+    this.route.queryParams.subscribe(params => {
+      this.filters = { ...params };
+
+      if (this.filters.category_id) this.filters.category_id = +this.filters.category_id;
+      if (this.filters.subcategory_id) this.filters.subcategory_id = +this.filters.subcategory_id;
+
+      if (this.filters.category_id) {
+        this.getSubcategories(this.filters.category_id);
+      } else {
+        this.subcategories = [];
+      }
+
+      this.filterEvents();
+    });
     this.communicationEventsService.eventIdToDelete$.subscribe((id: number) => {
       this.selectedEventIdToDelete = id;
       const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModalMyEvents')!);
       modal.show();
     })
-    this.eventsService.getEventsByUser().subscribe(
-      res => {
-        const now = new Date();
-        const events = res.events;
-
-        this.oldEvents = events.filter(event => {
-          const eventDateTime = new Date(`${event.date}T${event.start_time}`);
-          return eventDateTime <= now;
-        });
-
-        this.events = events.filter(event => {
-          const eventDateTime = new Date(`${event.date}T${event.start_time}`);
-          return eventDateTime > now;
-        });
-        this.loading = false;
-      }
-    )
     this.eventsService.getJoinedEvents().subscribe(
       (res) => {
         res = res.events;
@@ -92,6 +89,21 @@ export class MyEventsComponent {
         this.communicationEventsService.setEventsJoinedIds(this.joinedEventsIds);
       }
     );
+  }
+
+  public setOldOrActualEvent(events: MyEvent[]) {
+    const now = new Date();
+
+    this.oldEvents = events.filter(event => {
+      const eventDateTime = new Date(`${event.date}T${event.start_time}`);
+      return eventDateTime <= now;
+    });
+
+    this.events = events.filter(event => {
+      const eventDateTime = new Date(`${event.date}T${event.start_time}`);
+      return eventDateTime > now;
+    });
+    this.loading = false;
   }
 
   public getSubcategories(category_id: number) {
@@ -104,31 +116,35 @@ export class MyEventsComponent {
 
   categoryReceived(category_id: number) {
     this.getSubcategories(category_id);
-    //this.addCategoryToFilter(category_id);
+    this.updateFilters({ category_id });
   }
 
   addCityToFilter(city: string) {
-    /*this.filters.city = city;
-    this.filterEvents();*/
+    this.updateFilters({ city });
   }
-  addCategoryToFilter(category_id: number) {
-    /*this.filters.category_id = category_id;
-    this.filterEvents();*/
-  }
+
   addSubcategoryToFilter(subcategory_id: number) {
-    /*this.filters.subcategory_id = subcategory_id;
-    this.filterEvents();*/
+    this.updateFilters({ subcategory_id });
+  }
+
+  updateFilters(newFilters: Partial<EventsFilters>) {
+    this.filters = { ...this.filters, ...newFilters };
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: this.filters,
+      queryParamsHandling: 'merge',
+    });
   }
 
   filterEvents() {
-    /*this.events = [];
+    this.events = [];
     this.loading = true;
-    this.eventsService.filterEvents(this.filters).subscribe(
-      (res) => {
-        this.events = res.events;
-        this.loading = false;
+    this.eventsService.getEventsByUser(this.filters).subscribe(
+      res => {
+        this.setOldOrActualEvent(res.events);
       }
-    )*/
+    )
   }
   chargeEventImg(event: MyEvent) {
     this.imgUrl = this.serverImgUrl + event.image_url;
