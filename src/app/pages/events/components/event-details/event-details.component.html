@@ -1,0 +1,47 @@
+<div class="card mb-2">
+  <div class="g-0 gap-4 d-flex flex-column" id="eventCard">
+    <div class="text-center">
+      <img src="{{ this.imgUrl }}{{this.event.image_url}}" class="img-fluid rounded-2" id="eventImg"
+           alt="picture of an event">
+
+    </div>
+    <div class="row">
+
+      <div class="col-7">
+        <div class="card-body">
+          <h5 class="card-title">{{ this.event.title }}</h5>
+          <p class="card-text">Descripción: {{ this.event.description }}</p>
+          <div class="row">
+            <div class="col-4">
+              <p class="card-text">Categoría: {{ this.categories.at(this.event.category_id - 1)?.name }}</p>
+              <p class="card-text">Subcategoría: {{ this.subcategories.at(this.event.subcategory_id - 1)?.name }}</p>
+              <p class="card-text">Dirección: {{ this.event.description }}</p>
+            </div>
+            <div class="col-4">
+              <p class="card-text">Fecha: {{ this.event.date }}</p>
+              <p class="card-text">Hora Inicio: {{ this.event.start_time.slice(0, 5) }}</p>
+              <p class="card-text">Hora Fin: {{ this.event.end_time.slice(0, 5) }}</p>
+            </div>
+            <div class="col-4">
+              <p class="card-text">Mín Personas: {{ this.event.min_participants }}</p>
+              <p class="card-text">Máx Personas: {{ this.event.max_participants }}</p>
+              <p class="card-text">Precio: {{ this.event.price }}€</p>
+              <pages-events-join-button [event]="this.event" class="me-1"></pages-events-join-button>
+              <pages-events-delete-button [event]="this.event" class="me-1"></pages-events-delete-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card-body">
+          <h5 class="card-title">Información de contacto</h5>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <pages-events-location-map [location]="this.latLong" class="w-100 h-100 mapa"></pages-events-location-map>
+    </div>
+  </div>
+</div>
+

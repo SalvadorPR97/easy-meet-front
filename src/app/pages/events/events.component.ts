@@ -10,11 +10,12 @@ import {MyEvent} from './interfaces/MyEvent.interface';
 import {ButtonCreateEventComponent} from './components/button-create-event/button-create-event.component';
 import {CommunicationEventsService} from './services/communication-events.service';
 import {AuthService} from '../../core/services/auth.service';
-import {ActivatedRoute, Router} from '@angular/router'; // <-- Import ActivatedRoute
+import {ActivatedRoute, Router} from '@angular/router';
 import {City} from './interfaces/City.interface';
 import {EventsFilters} from './interfaces/EventsFilters.interface';
 import {environment} from '../../../environments/environment';
 import {AngularToastifyModule, ToastService} from 'angular-toastify';
+import {EventDetailsComponent} from './components/event-details/event-details.component';
 
 declare const bootstrap: any;
 
@@ -27,6 +28,7 @@ declare const bootstrap: any;
     EventsListComponent,
     ButtonCreateEventComponent,
     AngularToastifyModule,
+    EventDetailsComponent,
   ],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
@@ -40,11 +42,12 @@ export class EventsComponent {
   public joinedEventsIds: number[] = [];
   public loading = true;
   public filters: EventsFilters = {};
+  public selectedEvent!: MyEvent;
   public imgUrl: string | ArrayBuffer | null = "assets/img/fotoGrupoParque.jpg";
   public serverImgUrl: string = environment.imgUrl;
   public selectedEventIdToDelete: number = 0;
   public deleting: boolean = false;
-  public eventLocation: { lat: number; lng: number } = {lat: 0, lng: 0};
+  public eventLocation: { lat: number; lng: number } = { lat: 36.7213028, lng: -4.4216366 };
 
   constructor(
     public eventsService: EventsService,
@@ -177,6 +180,7 @@ export class EventsComponent {
   chargeEvent(event: MyEvent) {
     this.imgUrl = this.serverImgUrl + event.image_url;
     this.eventLocation = {lat: event.latitude, lng: event.longitude};
+    this.selectedEvent = event;
   }
 
   confirmDelete() {

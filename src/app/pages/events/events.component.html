@@ -13,8 +13,13 @@
                               (eventImgUrlEmitter)="chargeEvent($event)"></pages-events-events-list>
   </div>
   <div class="d-flex flex-column justify-content-center col-5 me-auto ms-5 gap-2 py-2">
-    <pages-events-event-img [eventImg]="imgUrl"></pages-events-event-img>
-    <pages-events-location-map [location]="this.eventLocation"></pages-events-location-map>
+    @if (this.selectedEvent) {
+      <pages-events-event-details [event]="this.selectedEvent" [categories]="this.categories"
+                                  [subcategories]="this.allSubcategories"></pages-events-event-details>
+    } @else {
+      <pages-events-event-img [eventImg]="imgUrl"></pages-events-event-img>
+      <pages-events-location-map [location]="this.eventLocation"></pages-events-location-map>
+    }
   </div>
 </main>
 
