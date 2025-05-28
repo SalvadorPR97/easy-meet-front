@@ -33,7 +33,7 @@ export class CreateEventComponent {
   public selectedImage: File | null = null;
   public suggestions: any[] = [];
   public location = new FormControl('');
-  public locationCoordinates: { lat: number; lng: number } = { lat: 0, lng: 0 };
+  public locationCoordinates: { lat: number; lng: number } = { lat: 36.7213028, lng: -4.4216366 };
 
   constructor(public eventsService: EventsService,public createEventService: CreateEventService, private readonly fb: FormBuilder, public router: Router,
               private readonly nominatim: NominatimService) {
@@ -137,7 +137,7 @@ export class CreateEventComponent {
     return formData;
   }
   selectSuggestion(suggestion: any): void {
-    this.location.setValue(suggestion.display_name, { emitEvent: false });
+    this.location.setValue(suggestion.short_display, { emitEvent: false });
     this.locationCoordinates = { lat: suggestion.lat, lng: suggestion.lon };
     this.suggestions = [];
   }

@@ -39,7 +39,7 @@
         @for (suggestion of suggestions; track $index) {
           <li class="list-group-item list-group-item-action"
               (click)="selectSuggestion(suggestion)">
-            {{ suggestion.display_name }}
+            {{ suggestion.short_display }}
           </li>
         }
       </ul>
