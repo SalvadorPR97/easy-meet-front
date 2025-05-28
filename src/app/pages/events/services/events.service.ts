@@ -33,21 +33,27 @@ export class EventsService {
   public getEventsByCity(city: string): Observable<MyEventRes> {
     return this.http.get<MyEventRes>(`${this.apiUrl}events/city/${city}`);
   }
+
   public joinEvent(id: number): Observable<any> {
     return this.http.post(`${this.apiUrl}eventsUsers/join/${id}`, {});
   }
+
   public leaveEvent(id: number): Observable<any> {
     return this.http.post(`${this.apiUrl}eventsUsers/leave/${id}`, {});
   }
+
   public getJoinedEvents(): Observable<any> {
     return this.http.get(`${this.apiUrl}eventsUsers/joined`);
   }
+
   public getCities(): Observable<{ cities: City[] }> {
-    return this.http.get<{ cities: City[]}>(`${this.apiUrl}events/citiesAll`);
+    return this.http.get<{ cities: City[] }>(`${this.apiUrl}events/citiesAll`);
   }
+
   public getCitiesByOwner(owner_id: string | null): Observable<{ cities: City[] }> {
-    return this.http.get<{ cities: City[]}>(`${this.apiUrl}events/cities/${owner_id}`);
+    return this.http.get<{ cities: City[] }>(`${this.apiUrl}events/cities/${owner_id}`);
   }
+
   public filterEvents(filters: EventsFilters): Observable<MyEventRes> {
     let params = new HttpParams();
 
@@ -57,12 +63,14 @@ export class EventsService {
       }
     });
 
-    return this.http.get<MyEventRes>(`${this.apiUrl}events/filter`, { params });
+    return this.http.get<MyEventRes>(`${this.apiUrl}events/filter`, {params});
   }
+
   public getEventsByUser(filters: EventsFilters): Observable<MyEventRes> {
     return this.http.post<MyEventRes>(`${this.apiUrl}events/userEvents`, filters);
   }
-  public deleteEvent(id: number): Observable<{message: string}> {
-    return this.http.delete<{message: string}>(`${this.apiUrl}events/delete/${id}`);
+
+  public deleteEvent(id: number): Observable<{ message: string }> {
+    return this.http.delete<{ message: string }>(`${this.apiUrl}events/delete/${id}`);
   }
 }

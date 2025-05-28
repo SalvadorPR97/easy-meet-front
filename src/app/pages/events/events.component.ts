@@ -168,6 +168,9 @@ export class EventsComponent {
     this.eventsService.filterEvents(this.filters).subscribe(res => {
       this.events = res.events;
       this.loading = false;
+      if (this.events.length === 0) {
+        this.toastService.error('No hay eventos que mostrar');
+      }
     });
   }
 

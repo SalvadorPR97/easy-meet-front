@@ -51,5 +51,10 @@ export class EventCardComponent {
     }
   }
 
+  onImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    target.src = "assets/img/noEventImage.png";
+  }
+
   protected readonly environment = environment;
 }

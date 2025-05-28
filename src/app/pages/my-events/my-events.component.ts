@@ -13,6 +13,7 @@ import {EventsService} from '../events/services/events.service';
 import {CommunicationEventsService} from '../events/services/communication-events.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { environment } from '../../../environments/environment';
+import {AngularToastifyModule, ToastService} from 'angular-toastify';
 
 declare const bootstrap: any;
 
@@ -23,7 +24,8 @@ declare const bootstrap: any;
     EventFilterComponent,
     EventImgComponent,
     EventsListComponent,
-    LocationMapComponent
+    LocationMapComponent,
+    AngularToastifyModule
   ],
   templateUrl: './my-events.component.html',
   styleUrl: './my-events.component.css'
@@ -44,7 +46,7 @@ export class MyEventsComponent {
   public deleting: boolean = false;
 
   constructor(public eventsService: EventsService, public communicationEventsService: CommunicationEventsService,
-              public router: Router, public route: ActivatedRoute) {
+              public router: Router, public route: ActivatedRoute, public toastService: ToastService,) {
   }
 
   ngOnInit() {
@@ -142,7 +144,12 @@ export class MyEventsComponent {
     this.loading = true;
     this.eventsService.getEventsByUser(this.filters).subscribe(
       res => {
-        this.setOldOrActualEvent(res.events);
+        if (res.events.length === 0) {
+          this.toastService.error('No hay eventos que mostrar');
+        } else {
+          this.setOldOrActualEvent(res.events);
+        }
+        this.loading = false;
       }
     )
   }

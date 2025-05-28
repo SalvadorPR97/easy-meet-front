@@ -2,7 +2,7 @@
   <div class="row g-0 gap-4 d-flex align-items-center">
     <div class="col-4">
       <img src="{{ this.imgUrl }}{{this.event.image_url}}" class="img-fluid rounded-2 m-2"
-           alt="picture of an event">
+           alt="picture of an event" (error)="onImageError($event)">
     </div>
     <div class="col-7">
       <div class="card-body">

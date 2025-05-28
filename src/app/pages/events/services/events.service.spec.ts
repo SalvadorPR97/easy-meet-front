@@ -127,7 +127,7 @@ describe('EventsService', () => {
 
   it('should get events created by user', () => {
     const mockResponse: MyEventRes = { events: [] };
-    service.getEventsByUser().subscribe(res => {
+    service.getEventsByUser({}).subscribe(res => {
       expect(res).toEqual(mockResponse);
     });
 
