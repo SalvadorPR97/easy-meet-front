@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
@@ -10,10 +10,22 @@ export class AuthService {
   private readonly apiUrl = environment.apiUrl; // o la URL de tu backend
 
   constructor(private readonly http: HttpClient) {}
+  private profilePicChanged = new BehaviorSubject<string | null>(null);
+  profilePicChanged$ = this.profilePicChanged.asObservable();
 
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}login`, credentials);
   }
+
+  setProfilePicture(pic: string) {
+    localStorage.setItem('profile_pic', pic);
+    this.profilePicChanged.next(pic);
+  }
+
+  getProfilePicture(): string | null {
+    return localStorage.getItem('profile_pic');
+  }
+
 
   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}logout`, {});
@@ -34,11 +46,11 @@ export class AuthService {
   setUserInfo(user: any): void {
     localStorage.setItem('city', user.city);
     localStorage.setItem('userId', user.id);
+    this.setProfilePicture(user.profile_pic);
   }
 
   deleteUserInfo(): void {
-    localStorage.removeItem('city');
-    localStorage.removeItem('userId');
+    localStorage.clear()
   }
 
   isAuthenticated(): boolean {
