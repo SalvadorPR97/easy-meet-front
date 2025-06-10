@@ -11,7 +11,12 @@
   background-color: var(--wheat);
 }
 
-li{
+li {
   cursor: pointer;
+}
+
+li img {
+  height: 50px;
+  width: 50px;
 }
 
