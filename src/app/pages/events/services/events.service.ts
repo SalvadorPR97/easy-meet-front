@@ -73,4 +73,8 @@ export class EventsService {
   public deleteEvent(id: number): Observable<{ message: string }> {
     return this.http.delete<{ message: string }>(`${this.apiUrl}events/delete/${id}`);
   }
+
+  public getUsersInEvent(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}eventsUsers/usersInEvent/${id}`);
+  }
 }

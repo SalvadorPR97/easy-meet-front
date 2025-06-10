@@ -1,0 +1,5 @@
+<h4>Usuarios en el evento</h4>
+<hr>
+@for (user of this.users; track $index) {
+  <pages-events-user-card [user]="user" ></pages-events-user-card>
+}

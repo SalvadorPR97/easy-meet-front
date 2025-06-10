@@ -3,9 +3,5 @@
   overflow-y: auto;
 }
 #eventImg {
-  min-height: 20vh;
-}
-.mapa{
-  height: 30vh;
-  width: 30vh; !important;
+  max-height: 50vh;
 }

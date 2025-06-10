@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Subject} from 'rxjs';
+import {UserPublic} from '../interfaces/UserPublic.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,15 @@ export class CommunicationEventsService {
 
   setEventsJoinedIds(data: any) {
     this.eventsJoinedIds.next(data);
+  }
+
+  private readonly usersJoined = new BehaviorSubject<UserPublic[]>([]);
+
+  getUsersJoined() {
+    return this.usersJoined.asObservable();
+  }
+
+  setUsersJoined(data: any) {
+    this.usersJoined.next(data);
   }
 }

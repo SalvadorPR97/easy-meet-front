@@ -1,7 +1,7 @@
 <div class="card mb-2">
   <div class="g-0 gap-4 d-flex flex-column" id="eventCard">
-    <div class="text-center">
-      <img src="{{ this.imgUrl }}{{this.event.image_url}}" class="img-fluid rounded-2" id="eventImg"
+    <div class="text-center mt-1">
+      <img src="{{ this.imgUrl }}{{ this.event.image_url }}" class="img-fluid rounded-2" id="eventImg"
            alt="picture of an event">
 
     </div>
@@ -34,7 +34,7 @@
       </div>
       <div class="col">
         <div class="card-body">
-          <h5 class="card-title">Información de contacto</h5>
+          <pages-events-user-list [users]="this.event.users"></pages-events-user-list>
         </div>
       </div>
 

@@ -20,5 +20,6 @@ export interface MyEvent {
   price: number;
   created_at: string;
   updated_at: string;
+  users: any;
 
 }
