@@ -1,6 +1,6 @@
 <div class="card mb-2" (click)="emitEvent()">
   <div class="row g-0 gap-4 d-flex align-items-center">
-    <div class="col-4">
+    <div class="col-4 d-flex justify-content-center">
       <img src="{{ this.imgUrl }}{{this.event.image_url}}" class="img-fluid rounded-2 m-2"
            alt="picture of an event" (error)="onImageError($event)">
     </div>
@@ -17,7 +17,11 @@
           <div class="col-4">
             <p class="card-text">Fecha: {{ this.esFormatDate }}</p>
             <p class="card-text">Hora Inicio: {{ this.event.start_time.slice(0, 5) }}</p>
-            <p class="card-text">Hora Fin: {{ this.event.end_time.slice(0, 5) }}</p>
+            @if (event.end_time) {
+              <p class="card-text">Hora Fin: {{ this.event.end_time.slice(0, 5) }}</p>
+            } @else {
+              <p class="card-text">Hora Fin: Desconocida</p>
+            }
           </div>
           <div class="col-4">
             <p class="card-text">Mín Personas: {{ this.event.min_participants }}</p>

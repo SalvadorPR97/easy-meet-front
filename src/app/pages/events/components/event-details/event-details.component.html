@@ -20,7 +20,11 @@
             <div class="col-4">
               <p class="card-text">Fecha: {{ this.event.date }}</p>
               <p class="card-text">Hora Inicio: {{ this.event.start_time.slice(0, 5) }}</p>
-              <p class="card-text">Hora Fin: {{ this.event.end_time.slice(0, 5) }}</p>
+              @if (event.end_time) {
+                <p class="card-text">Hora Fin: {{ this.event.end_time.slice(0, 5) }}</p>
+              } @else {
+                <p class="card-text">Hora Fin: Desconocida</p>
+              }
             </div>
             <div class="col-4">
               <p class="card-text">Mín Personas: {{ this.event.min_participants }}</p>
