@@ -3,16 +3,11 @@
   background-color: var(--gold);
 }
 
-.btnNav {
-  background-color: var(--wheat-over);
-}
-
-.btnNav:hover {
-  background-color: var(--wheat);
-}
-
 li {
   cursor: pointer;
+}
+ul li{
+  background-color: var(--wheat);
 }
 
 li img {
@@ -20,3 +15,24 @@ li img {
   width: 50px;
 }
 
+ul a{
+  background-color: var(--wheat);
+}
+
+ul a:hover{
+  background-color: var(--wheat-over);
+}
+
+@media (min-width: 768px) {
+  ul a{
+    background-color: var(--wheat-over);
+  }
+
+  ul a:hover{
+    background-color: var(--wheat);
+  }
+
+  ul li{
+    background-color: var(--wheat-over);
+  }
+}
