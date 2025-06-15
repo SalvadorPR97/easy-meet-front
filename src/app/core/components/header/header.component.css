@@ -7,7 +7,7 @@ li {
   cursor: pointer;
 }
 ul li{
-  background-color: var(--wheat);
+  background-color: white;
 }
 
 li img {
@@ -16,7 +16,7 @@ li img {
 }
 
 ul a{
-  background-color: var(--wheat);
+  background-color: white;
 }
 
 ul a:hover{
